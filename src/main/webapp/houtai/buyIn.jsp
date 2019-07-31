@@ -11,12 +11,8 @@
 <body>
 <form role="form" class="form-inline">
     <div class="form-group">
-        <label for="procurementNo">流水号</label>
-        <input type="text" class="form-control" id="procurementNo" >
-    </div>
-    <div class="form-group">
-        <label for="caigoudate">申请日期</label>
-        <input type="text" class="form-control" id="caigoudate" >
+        <label for="explain">说明</label>
+        <input type="text" class="form-control" id="explain" >
     </div>
     <div class="form-group">
         <label for="caigouperson">申请人</label>
@@ -136,23 +132,35 @@
 
     //点击提交按钮时
     $("#submit").click(function () {
-        var procurementNo = $("#procurementNo").val();//订单号
-        var applydate = $("#caigoudate").val();
+        var explain = $("#explain").val();//说明
         var applyperson=$("#caigouperson").val();//采购人
         var applydept=$("#caigoudept").val();//申请部门
         var goodsarr=new Array();//采购商品的集合
+        var purchasePrice=0;
         //获取所有的订单详情
         $("#mytbd tr").each(function () {
             //每一行都是一个对象
             var goods = new Object();
             goods.goodNo=$(this).children("td").eq(0).text();
-            goods.procurementNo=procurementNo;
-            goods.goodsNum=$(this).find("input").val();
-            goods.totalprice=$(this).children("td").eq(8).text();
+            goods.goodAmount=$(this).find("input").val();
+            goods.totalPrice=$(this).children("td").eq(8).text();
+            purchasePrice+=parseInt(goods.totalPrice);
             goodsarr.push(goods);//将当前对象存放到数组中
         })
-        var jsonstr={"procurementNo":procurementNo,"applydate":applydate,"applyperson":applyperson,"applydept":applydept,"goods":goodsarr}
+        var jsonstr={"explain":explain,"applyperson":applyperson,"applydept":applydept,"purchasePrice":purchasePrice,"goods":goodsarr}
         alert(JSON.stringify(jsonstr))
+
+        $.ajax({
+            url:"pur/purchaseGood",
+            type:"post",
+            data:JSON.stringify(jsonstr),
+            contentType:"application/json;charset=UTF-8",
+            accept:"/",
+            success:function () {
+                console.log("success")
+                alert("订单生成成功")
+            }
+        });
     })
 
 </script>
