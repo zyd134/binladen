@@ -75,7 +75,7 @@
                     </li>
                 </c:if>
                 <li class="paginate_button active">
-                    <a href="#" aria-controls="datatable-checkbox" data-dt-idx="1" tabindex="0">第${currentPage}/${totalPage}页</a>
+                    <a  aria-controls="datatable-checkbox" data-dt-idx="1" tabindex="0">第${currentPage}/${totalPage}页</a>
                 </li>
 
                 <c:if test="${totalPage!=1 && currentPage<totalPage}">
