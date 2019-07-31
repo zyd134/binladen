@@ -66,6 +66,7 @@
             </div>
             <div class="modal-body">
                 <form id="myform2" method="post">
+                    <input name="id" class="id" id="id" style="display: none"/>
                     编码：<input class="customerNo" id="customerNo" name="customerNo" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     姓名：<input class="contacts" id="contacts" name="contacts"/><br><br>
                     电话：<input class="tel" id="tel" name="tel" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -129,6 +130,7 @@
 <script>
     //页面加载完成时
     $(function () {
+        var id;
         query();
         //queryCla();
     })
@@ -142,6 +144,7 @@
                 //每次加载之前请空表格的内容
                 document.getElementById("mytbd").innerHTML="";
                 for (var i=0;i<data.length;i++){
+                    id=data[i].id;
                     var tr="<tr>\n" +
                         "<td>"+data[i].customerNo+"</td>\n" +
                         "<td>"+data[i].contacts+"</td>\n" +
@@ -170,13 +173,15 @@
 
     //删除
     function delCust(val){
+        alert("######delCust##############");
         $.ajax({
             url:"delCust",
             type:"post",
             data:{"id":val},
-            dataType:"json",
+            dataType:"text",
             success:function (data) {
-                query();
+                    alert("delCust##############");
+                    query();
             }
         });
 
@@ -197,7 +202,8 @@
     //点击修改时需要将被点击行的数据填充到from中
     $("#mytbd").on("click",".update",function () {
         //节点
-        alert($(this).parent().parent().parent().parent().parent().children(0).html());
+        alert(id);
+        $(".id").val(id);
         $(".customerNo").val($(this).parent().parent().parent().parent().parent().find("td").eq(0).html());
         $(".contacts").val($(this).parent().parent().parent().parent().parent().find("td").eq(1).html());
         $(".tel").val($(this).parent().parent().parent().parent().parent().find("td").eq(2).html());
