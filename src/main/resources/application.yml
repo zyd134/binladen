@@ -1,0 +1,13 @@
+server:
+  servlet:
+    context-path: /binladen
+spring:
+   mvc:
+     view:
+       prefix: /
+       suffix: .jsp
+   datasource:
+     driver-class-name: com.mysql.jdbc.Driver
+     url: jdbc:mysql://localhost:3306/binladen?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=UTF-8
+     username: root
+     password: 123456
