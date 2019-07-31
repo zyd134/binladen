@@ -30,8 +30,9 @@ public class CustController {
 
     @RequestMapping("/delCust")
     @ResponseBody
-    public void delCust(int id){
+    public Object delCust(int id){
         customerService.delCust(id);
+        return "true";
     }
 
     @RequestMapping("/updateCust")
