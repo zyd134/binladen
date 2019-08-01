@@ -53,6 +53,11 @@ public class PermissionController {
         return "houtai/ceshi";
     }
 
+    @RequestMapping("toSelectPro")
+    public String toSelectPro(){
+        return "houtai/selectPro";
+    }
+
     @RequestMapping("selectPermission")
     @ResponseBody
     public List<Map> selectPermission(HttpSession session){
