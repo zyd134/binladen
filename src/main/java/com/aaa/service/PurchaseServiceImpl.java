@@ -6,6 +6,7 @@ import com.aaa.entity.PurchaseDetail;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class PurchaseServiceImpl implements PurchaseService{
@@ -22,5 +23,17 @@ public class PurchaseServiceImpl implements PurchaseService{
     @Override
     public boolean addPurDetail(PurchaseDetail purchaseDetail) {
         return purchaseDao.addPurDetail(purchaseDetail);
+    }
+
+    //查询采购订单
+    @Override
+    public List<Procurement> getProListByStatus(int status) {
+        return purchaseDao.getProListByStatus(status);
+    }
+
+    //通过订单编号查询订单明细
+    @Override
+    public List<PurchaseDetail> getPurchaseListByPno(String pNo) {
+        return purchaseDao.getPurchaseListByPno(pNo);
     }
 }

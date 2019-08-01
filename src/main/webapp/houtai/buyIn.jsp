@@ -16,7 +16,7 @@
     </div>
     <div class="form-group">
         <label for="caigouperson">申请人</label>
-        <input type="text" class="form-control" id="caigouperson" value="${user.name}">
+        <input type="text" class="form-control" id="caigouperson" value="${emp.name}" readonly>
     </div>
     <div class="form-group">
         <label for="caigoudept">申请部门</label>
