@@ -37,4 +37,5 @@ public class PurchaseDetail {
     public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
     }
+
 }

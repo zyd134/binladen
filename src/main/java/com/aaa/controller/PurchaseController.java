@@ -8,12 +8,13 @@ import net.sf.json.JSON;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import java.util.Date;
+import java.util.*;
 
 @Controller
 @RequestMapping("/pur")
@@ -21,6 +22,9 @@ public class PurchaseController {
     @Resource
     private PurchaseService purchaseService;
 
+
+
+    //添加采购订单
     @RequestMapping("/purchaseGood")
     @ResponseBody
     public void purchaseGood(@RequestBody JSONObject order){
@@ -29,25 +33,42 @@ public class PurchaseController {
         procurement.setProcurementNo("CGDD"+NumberUtil.createNum());
         procurement.setPurchaseTime(new Date());
         procurement.setPurchaser(order.getString("applyperson"));
-        procurement.setExplain(order.getString("explain"));
+        procurement.setP_explain(order.getString("explain"));
         procurement.setPurchasePrice(order.getDouble("purchasePrice"));
         JSONArray goodArr = order.getJSONArray("goods");
 
-        for(int i=0;i<goodArr.size();i++){
-            JSONObject obj=goodArr.getJSONObject(i);
-            pd=(PurchaseDetail)JSONObject.toBean(obj,PurchaseDetail.class);
-            pd.setProcurementNo(procurement.getProcurementNo());
-            if(purchaseService.addPurDetail(pd)){
-                System.out.println("添加订单明细成功");
-            }else{
-                System.out.println("添加订单明细失败");
-            }
-        }
-
         if(purchaseService.addProcurement(procurement)){
             System.out.println("添加采购订单成功");
+
+            for(int i=0;i<goodArr.size();i++){
+                JSONObject obj=goodArr.getJSONObject(i);
+                pd=(PurchaseDetail)JSONObject.toBean(obj,PurchaseDetail.class);
+                pd.setProcurementNo(procurement.getProcurementNo());
+                if(purchaseService.addPurDetail(pd)){
+                    System.out.println("添加订单明细成功");
+                }else{
+                    System.out.println("添加订单明细失败");
+                }
+            }
         }else{
             System.out.println("添加采购订单失败");
         }
+
+
+    }
+
+
+    //查询采购订单
+    @RequestMapping("/selectPurOrder")
+    public String selectPurOrder(int status,Model model){
+        model.addAttribute("procurementList",purchaseService.getProListByStatus(status));
+        return "houtai/procurementOrderMgt";
+    }
+
+    @RequestMapping("/selectPurOrderByStatus")
+    @ResponseBody
+    public List<Procurement> selectPurOrderByStatus(int status){
+        System.out.println("jjjjjjjjjjj");
+        return purchaseService.getProListByStatus(status);
     }
 }
