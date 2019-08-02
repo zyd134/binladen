@@ -22,6 +22,11 @@ public class PurchaseController {
     @Resource
     private PurchaseService purchaseService;
 
+    @RequestMapping("/toPurOrderPay")
+    public String toPurOrderPay(int status,Model model){
+        model.addAttribute("procurementList",purchaseService.getProListByStatus(status));
+        return "houtai/purchaseOrderPay";
+    }
 
 
     //添加采购订单
@@ -68,7 +73,7 @@ public class PurchaseController {
     @RequestMapping("/selectPurOrderByStatus")
     @ResponseBody
     public List<Procurement> selectPurOrderByStatus(int status){
-        System.out.println("jjjjjjjjjjj");
+//        System.out.println("jjjjjjjjjjj");
         return purchaseService.getProListByStatus(status);
     }
 }

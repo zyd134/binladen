@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -39,4 +40,19 @@ public class ProcurementController {
             return "false";
         }
     }
+
+
+    //通过订单编号修改订单状态
+    @RequestMapping("/updPOrderStatusByNo")
+    @ResponseBody
+    public Map<String,String> updPOrderStatusByNo(Integer status,String pNo){
+        Map map = new HashMap();
+        if(procurementService.examineById(status,pNo)>0){
+            map.put("result","success");
+        }else{
+            map.put("result","fail");
+        }
+        return map;
+    }
+
 }

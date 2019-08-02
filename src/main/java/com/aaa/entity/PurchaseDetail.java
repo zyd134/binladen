@@ -3,6 +3,7 @@ package com.aaa.entity;
 public class PurchaseDetail {
     private String procurementNo;
     private String goodNo;
+    private String goodName;
     private int goodAmount;
     private double totalPrice;
 
@@ -38,4 +39,11 @@ public class PurchaseDetail {
         this.totalPrice = totalPrice;
     }
 
+    public String getGoodName() {
+        return goodName;
+    }
+
+    public void setGoodName(String goodName) {
+        this.goodName = goodName;
+    }
 }
