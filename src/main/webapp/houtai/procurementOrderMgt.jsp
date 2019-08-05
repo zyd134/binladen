@@ -19,6 +19,7 @@
     <li class="select" status="2"><a href="#ios" data-toggle="tab">已通过</a></li>
     <li class="select" status="4"><a href="#notpay" data-toggle="tab">未付款</a></li>
     <li class="select" status="5"><a href="#payed" data-toggle="tab">已付款</a></li>
+    <li class="select" status="8"><a href="#sto_in" data-toggle="tab">未验收</a></li>
     <li class="select" status="6"><a href="#finish" data-toggle="tab">已完成</a></li>
 </ul>
 <div id="myTabContent" class="tab-content">
@@ -196,6 +197,44 @@
                 <div class="x_panel">
                     <div class="x_title">
                         <h2>已付款订单</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>订单编号</th>
+                                <th>采购时间</th>
+                                <th>采购人</th>
+                                <th>说明</th>
+                                <th>采购总价</th>
+                                <th>订单状态</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+
+
+    <div class="tab-pane fade" id="sto_in">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>未验收订单</h2>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">

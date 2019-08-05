@@ -35,7 +35,7 @@ public class PurchaseController {
     public void purchaseGood(@RequestBody JSONObject order){
         Procurement procurement = new Procurement();
         PurchaseDetail pd=new PurchaseDetail();
-        procurement.setProcurementNo("CGDD"+NumberUtil.createNum());
+        procurement.setProcurementNo(order.getString("purNo"));
         procurement.setPurchaseTime(new Date());
         procurement.setPurchaser(order.getString("applyperson"));
         procurement.setP_explain(order.getString("explain"));
