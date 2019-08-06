@@ -20,4 +20,7 @@ public interface ProcurementDao {
 
     @Update("update procurement set status=#{status} where procurementNo=#{procurementNo}")
     public int examineById(@Param("status") Integer status, @Param("procurementNo") String procurementNo);
+
+    @Select("select * from purchase_detail p JOIN goods g on p.goodNo=g.goodNo where procurementNo=#{procurementNo}")
+    public List<Map> selectDet(String procurementNo);
 }

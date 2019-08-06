@@ -28,6 +28,12 @@ public class ProcurementController {
         return procurementService.selectDic();
     }
 
+    @RequestMapping("selectDet")
+    @ResponseBody
+    public List<Map> selectDet(String procurementNo){
+        return procurementService.selectDet(procurementNo);
+    }
+
     @RequestMapping("examineById")
     @ResponseBody
     public String examineById(Integer status,String procurementNo){
