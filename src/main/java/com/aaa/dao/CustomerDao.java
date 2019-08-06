@@ -16,6 +16,7 @@ public interface CustomerDao {
     @Insert("insert into customer values (#{id},#{customerNo},#{contacts},#{tel},#{address},#{email},#{bank},#{bankAccount})")
     public void addCust(Customer customer);
 
+    //
     @Delete("delete from customer where id=#{id}")
     public void delCust(int id);
     //修改
