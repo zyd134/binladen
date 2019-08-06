@@ -144,6 +144,66 @@
     $(document).ready(function(){
         var statusflag=4;
 
+        //一进来就查询
+        $.ajax({
+            url:"sale/selectSaleOrderByStatus",
+            type:"post",
+            data:{status:4,empNo:0},
+            datatype:"json",
+            success:function(data){
+                    for(var i=0;i<data.length;i++){
+                        var tr="<tr index="+i+" style=\"background-color: #d4edda\">\n" +
+                            "                                <td>"+data[i].saleNo+"</td>\n" +
+                            "                                <td>"+data[i].saleTime+"</td>\n"+
+                            "                                <td>"+data[i].salePerson+"</td>\n" +
+                            "                                <td>"+data[i].s_explain+"</td>\n" +
+                            "                                <td>"+data[i].salePrice+"</td>\n" +
+                            "                                <td>"+data[i].statusName+"</td>\n" ;
+
+
+                        tr+="<td>\n" +
+                            "                                        <div class=\"btn-group\">\n" +
+                            "                                            <button type=\"button\" class=\"btn btn-danger\">操作</button>\n" +
+                            "                                            <button type=\"button\" class=\"btn btn-danger dropdown-toggle\" data-toggle=\"dropdown\" aria-expanded=\"false\" style=\"height: 34px\">\n" +
+                            "                                                <span class=\"caret\"></span>\n" +
+                            "                                                <span class=\"sr-only\">Toggle Dropdown</span>\n" +
+                            "                                            </button>\n" +
+                            "                                            <ul class=\"dropdown-menu\" role=\"menu\">\n" ;
+                        if(status==6){
+                            tr+="                                                <li class=\"confirmbtn\" saleNo=\""+data[i].saleNo+"\"><a>签收</a>\n" ;
+                        }else{
+                            tr+="                                                <li class=\"toldpaybtn\" ><a >催款</a>\n" +
+                                "                                                </li>\n";
+                        }
+
+                        tr+="                                            </ul>\n" +
+                            "                                        </div>\n" +
+                            "                                    </td>";
+                        tr+="                            </tr>"+
+                            "<tr index="+i+">\n" +
+                            "                                        <th>商品编号</th>\n" +
+                            "                                        <th>商品名</th>\n" +
+                            "                                        <th>商品数量</th>\n" +
+                            "                                        <th>总价</th>\n" +
+                            "                                    </tr>";
+                        for(var j=0;j<data[i].saleDetailList.length;j++){
+                            tr+="<tr index="+i+">\n" +
+                                "                                            <td>"+data[i].saleDetailList[j].goodNo+"</td>\n" +
+                                "                                            <td>"+data[i].saleDetailList[j].goodName+"</td>\n" +
+                                "                                            <td>"+data[i].saleDetailList[j].goodAmount+"</td>\n" +
+                                "                                            <td>"+data[i].saleDetailList[j].totalPrice+"</td>\n" ;
+
+
+                            tr+="                                        </tr>";
+                        }
+                        $("tbody:first").append(tr);
+
+                }
+
+
+            }
+        })
+
 
         $(".select").click(function(){
             var obj= $(this);
@@ -152,12 +212,12 @@
             $.ajax({
                 url:"sale/selectSaleOrderByStatus",
                 type:"post",
-                data:{status:status},
+                data:{status:status,empNo:0},
                 datatype:"json",
                 success:function(data){
                     if(statusflag!=status){
                         for(var i=0;i<data.length;i++){
-                            var tr="<tr index="+i+">\n" +
+                            var tr="<tr index="+i+" style=\"background-color: #d4edda\">\n" +
                                 "                                <td>"+data[i].saleNo+"</td>\n" +
                                 "                                <td>"+data[i].saleTime+"</td>\n"+
                                 "                                <td>"+data[i].salePerson+"</td>\n" +
@@ -192,7 +252,7 @@
                                 "                                        <th>总价</th>\n" +
                                 "                                    </tr>";
                             for(var j=0;j<data[i].saleDetailList.length;j++){
-                                tr+="<tr index="+i+">\n" +
+                                tr+="<tr index="+i+" >\n" +
                                     "                                            <td>"+data[i].saleDetailList[j].goodNo+"</td>\n" +
                                     "                                            <td>"+data[i].saleDetailList[j].goodName+"</td>\n" +
                                     "                                            <td>"+data[i].saleDetailList[j].goodAmount+"</td>\n" +

@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface SaleService {
     //查询采购订单
-    public List<Sale> getSaleListByStatus(int status);
+    public List<Sale> getSaleListByStatus(int status,String empNo);
 
     //通过订单编号查询订单明细
     public List<SaleDetail> getSaleDetailListBySaleNo(String saleNo);

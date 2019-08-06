@@ -20,7 +20,7 @@
     </div>
     <div class="form-group">
         <label for="saleperson">申请人</label>
-        <input type="text" class="form-control" id="saleperson" value="${emp.name}" readonly>
+        <input type="text" class="form-control" id="saleperson" value="${emp.name}" empNo="${emp.empNo}" readonly>
     </div>
     <div class="form-group">
         <label for="saledept">申请部门</label>
@@ -138,7 +138,7 @@
     $("#submit").click(function () {
         var saleNo=$("#saleNo").val();
         var explain = $("#explain").val();//说明
-        var saleperson=$("#saleperson").val();//采购人
+        var saleperson=$("#saleperson").attr("empNo");//采购人
         var saledept=$("#saledept").val();//申请部门
         var goodsarr=new Array();//采购商品的集合
         var salePrice=0;

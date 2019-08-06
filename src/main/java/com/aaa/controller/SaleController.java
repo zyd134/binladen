@@ -26,17 +26,16 @@ public class SaleController {
 
     //获得销售订单列表
     @RequestMapping("/getSaleOrderList")
-    public String getSaleOrderList(int status,Model model){
-        model.addAttribute("saleList",saleService.getSaleListByStatus(status));
+    public String getSaleOrderList(){
         return "houtai/saleOrderMgt";
     }
 
     //通过订单状态获得列表
     @RequestMapping("/selectSaleOrderByStatus")
     @ResponseBody
-    public List<Sale> selectSaleOrderByStatus(int status){
+    public List<Sale> selectSaleOrderByStatus(int status,String empNo){
 //        System.out.println("jjjjjjjjjjj");
-        return saleService.getSaleListByStatus(status);
+        return saleService.getSaleListByStatus(status,empNo);
     }
 
     //通过订单编号修改订单状态
@@ -54,8 +53,8 @@ public class SaleController {
 
     //跳转到收款界面
     @RequestMapping("/toSaleOrderGetPay")
-    public String toSaleOrderGetPay(int status,Model model){
-        model.addAttribute("saleList",saleService.getSaleListByStatus(status));
+    public String toSaleOrderGetPay(int status,String empNo,Model model){
+        model.addAttribute("saleList",saleService.getSaleListByStatus(status,empNo));
         return "houtai/saleOrderGetPay";
     }
 

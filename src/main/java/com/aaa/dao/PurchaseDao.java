@@ -19,7 +19,12 @@ public interface PurchaseDao {
     public boolean addPurDetail(PurchaseDetail purchaseDetail);
 
     //查询采购订单
-    @Select("select * from procurement where status = #{status}")
+    @Select({"<script>",
+            "select * from procurement where status = #{status}" +
+                    "<when test='empNo!=0'>",
+                        " and purchaser = #{empNo}",
+                    "</when>",
+            "</script>"})
     @Results({
             @Result(property = "procurementNo",column = "procurementNo"),
             @Result(property = "statusName",column = "status",
@@ -27,7 +32,7 @@ public interface PurchaseDao {
             @Result(property = "purchaseDetailList", column = "procurementNo",
                     many = @Many(select = "com.aaa.dao.PurchaseDao.getPurchaseListByPno"))
     })
-    public List<Procurement> getProListByStatus(int status);
+    public List<Procurement> getProListByStatus(@Param("status") int status,@Param("empNo") String empNo);
 
     //通过订单编号查询订单明细
     @Select("select * from purchase_detail pd join goods g on pd.goodNo = g.goodNo where procurementNo=#{pNo}")

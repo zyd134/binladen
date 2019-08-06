@@ -34,41 +34,17 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th>订单编号</th>
+                                <th >订单编号</th>
                                 <th>销售时间</th>
                                 <th>销售人</th>
                                 <th>说明</th>
                                 <th>销售总价</th>
                                 <th>订单状态</th>
+                                <th>操作</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach var="sale" items="${saleList}">
-                                <tr>
-                                    <td>${sale.saleNo}</td>
-                                    <td><fmt:formatDate value="${sale.saleTime}" pattern="yyyy-MM-dd" /></td>
-                                    <td>${sale.salePerson}</td>
-                                    <td>${sale.s_explain}</td>
-                                    <td>${sale.salePrice}</td>
-                                    <td>${sale.statusName}</td>
-                                </tr>
 
-                                <tr>
-                                    <th>商品编号</th>
-                                    <th>商品名</th>
-                                    <th>商品数量</th>
-                                    <th>总价</th>
-                                </tr>
-
-                                <c:forEach var="sdList" items="${sale.saleDetailList}">
-                                    <tr>
-                                        <td>${sdList.goodNo}</td>
-                                        <td>${sdList.goodName}</td>
-                                        <td>${sdList.goodAmount}</td>
-                                        <td>${sdList.totalPrice}</td>
-                                    </tr>
-                                </c:forEach>
-                            </c:forEach>
                             </tbody>
                         </table>
 
@@ -207,8 +183,53 @@
 <script>
     $(document).ready(function(){
         var statusflag=2;
+        var empNo=${emp.empNo};
+
+        //一进来就查询
+        $.ajax({
+            url:"sale/selectSaleOrderByStatus",
+            type:"post",
+            data:{status:2,empNo:0},
+            datatype:"json",
+            success:function(data){
+
+                    for(var i=0;i<data.length;i++){
+                        var tr="<tr index="+i+" style=\"background-color: #d4edda\">\n" +
+                            "                                <td>"+data[i].saleNo+"</td>\n" +
+                            "                                <td>"+data[i].saleTime+"</td>\n"+
+                            "                                <td>"+data[i].salePerson+"</td>\n" +
+                            "                                <td>"+data[i].s_explain+"</td>\n" +
+                            "                                <td>"+data[i].salePrice+"</td>\n" +
+                            "                                <td>"+data[i].statusName+"</td>\n" ;
+                        if(statusflag==2){
+                            tr+="<td>" +
+                                "<button saleNo="+data[i].saleNo+" class=\"recheckbtn btn btn-primary btn-sm\">请求重审</button>" +
+                                "</td>"
+                        }
+                        tr+="                            </tr>";
+                        tr+="<tr index="+i+">\n" +
+                            "                                        <th>商品编号</th>\n" +
+                            "                                        <th>商品名</th>\n" +
+                            "                                        <th>商品数量</th>\n" +
+                            "                                        <th>总价</th>\n" +
+                            "                                    </tr>";
+                        for(var j=0;j<data[i].saleDetailList.length;j++){
+                            tr+="<tr index="+i+">\n" +
+                                "                                            <td>"+data[i].saleDetailList[j].goodNo+"</td>\n" +
+                                "                                            <td>"+data[i].saleDetailList[j].goodName+"</td>\n" +
+                                "                                            <td>"+data[i].saleDetailList[j].goodAmount+"</td>\n" +
+                                "                                            <td>"+data[i].saleDetailList[j].totalPrice+"</td>\n" +
+                                "                                        </tr>";
+                        }
+                        $("tbody:first").append(tr);
+                }
 
 
+            }
+        })
+
+
+        //
         $(".select").click(function(){
             var obj= $(this);
             var status=obj.attr("status");
@@ -216,27 +237,32 @@
             $.ajax({
                 url:"sale/selectSaleOrderByStatus",
                 type:"post",
-                data:{status:status},
+                data:{status:status,empNo:empNo},
                 datatype:"json",
                 success:function(data){
                     if(statusflag!=status){
                         for(var i=0;i<data.length;i++){
-                            var tr="<tr>\n" +
+                            var tr="<tr index="+i+" style=\"background-color: #d4edda\">\n" +
                                 "                                <td>"+data[i].saleNo+"</td>\n" +
                                 "                                <td>"+data[i].saleTime+"</td>\n"+
                                 "                                <td>"+data[i].salePerson+"</td>\n" +
                                 "                                <td>"+data[i].s_explain+"</td>\n" +
                                 "                                <td>"+data[i].salePrice+"</td>\n" +
                                 "                                <td>"+data[i].statusName+"</td>\n" +
-                                "                            </tr>"+
-                                "<tr>\n" +
+                                "                            </tr>";
+                                    if(status==2){
+                                        tr+="<td>" +
+                                            "<button saleNo="+data[i].saleNo+" class=\"recheckbtn btn btn-primary btn-sm\">请求重审</button>" +
+                                            "</td>"
+                                    }
+                                tr+="<tr index="+i+">\n" +
                                 "                                        <th>商品编号</th>\n" +
                                 "                                        <th>商品名</th>\n" +
                                 "                                        <th>商品数量</th>\n" +
                                 "                                        <th>总价</th>\n" +
                                 "                                    </tr>";
                             for(var j=0;j<data[i].saleDetailList.length;j++){
-                                tr+="<tr>\n" +
+                                tr+="<tr index="+i+">\n" +
                                     "                                            <td>"+data[i].saleDetailList[j].goodNo+"</td>\n" +
                                     "                                            <td>"+data[i].saleDetailList[j].goodName+"</td>\n" +
                                     "                                            <td>"+data[i].saleDetailList[j].goodAmount+"</td>\n" +
@@ -255,6 +281,33 @@
                         }
                     })
 
+                }
+            })
+        })
+
+
+        //请求重新审核
+        $("tbody").on("click",".recheckbtn",function(){
+            var obj=$(this);
+            var saleNo = obj.attr("saleNo");
+            $.ajax({
+                url:"sale/updSaleStatusByNo",
+                type:"post",
+                data:{status:1,saleNo:saleNo},
+                datatype:"json",
+                success:function (data) {
+                    if(data.result=="success"){
+                        alert("请求重新审核成功！");
+                        var index = obj.parents("tr").attr("index");
+                        obj.parents("tr").remove();
+                        $("tr").each(function(){
+                            if($(this).attr("index")==index){
+                                $(this).remove();
+                            }
+                        })
+                    }else{
+                        alert("请求重新审核失败！");
+                    }
                 }
             })
         })
