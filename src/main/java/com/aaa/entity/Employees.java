@@ -7,7 +7,7 @@ public class Employees {
     private int sex;
     private String idCard;
     private int role;
-    private int department;
+    private String department;
     private String tel;
     private String email;
     private String address;
@@ -29,7 +29,7 @@ public class Employees {
         this.name = name;
     }
 
-    public Employees(int id, String empNo, String name, int sex, String idCard, int role, int department, String tel, String email, String address, String nativePlace, String national, String educationBg, String school, String bank, String password, String bankAccount) {
+    public Employees(int id, String empNo, String name, int sex, String idCard, int role, String department, String tel, String email, String address, String nativePlace, String national, String educationBg, String school, String bank, String password, String bankAccount) {
         this.id = id;
         this.empNo = empNo;
         this.name = name;
@@ -97,11 +97,11 @@ public class Employees {
         this.role = role;
     }
 
-    public int getDepartment() {
+    public String getDepartment() {
         return department;
     }
 
-    public void setDepartment(int department) {
+    public void setDepartment(String department) {
         this.department = department;
     }
 

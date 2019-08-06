@@ -30,7 +30,7 @@ public interface PurchaseDao {
     public List<Procurement> getProListByStatus(int status);
 
     //通过订单编号查询订单明细
-    @Select("select * from purchase_detail where procurementNo=#{pNo}")
+    @Select("select * from purchase_detail pd join goods g on pd.goodNo = g.goodNo where procurementNo=#{pNo}")
     public List<PurchaseDetail> getPurchaseListByPno(String pNo);
 
     //查询订单状态

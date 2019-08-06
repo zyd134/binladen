@@ -66,7 +66,7 @@
     </div>
 
 
-    <div class="col-sm-12">
+    <div class="col-sm-12" style="position: fixed;bottom: 10px">
         <div class="dataTables_paginate paging_simple_numbers" id="datatable-checkbox_paginate">
             <ul class="pagination" style="float:right;margin-right:100px">
                 <c:if test="${currentPage!=1}">

@@ -2,8 +2,10 @@ package com.aaa.controller;
 
 import com.aaa.entity.Employees;
 import com.aaa.service.PermissionService;
+import com.aaa.utils.NumberUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -43,7 +45,8 @@ public class PermissionController {
     }
 
     @RequestMapping("toBuyIn")
-    public String toBuyIn(){
+    public String toBuyIn(Model model){
+        model.addAttribute("purNo","CGDD"+NumberUtil.createNum());
         return "houtai/buyIn";
     }
 
