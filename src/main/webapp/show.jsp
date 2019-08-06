@@ -189,18 +189,6 @@
 
     }
 
-    //添加学生
-    // btn.onclick=function () {
-    //     $.ajax({
-    //         url:"addCust",
-    //         type:"post",
-    //         data:$("#myform3").serialize(),//将表单序列化提交，将表单中的数据全部提交
-    //         success:function (data) {
-    //             query();
-    //         }
-    //     });
-    // }
-
     //点击修改时需要将被点击行的数据填充到from中
     $("#mytbd").on("click",".update",function () {
         //节点
