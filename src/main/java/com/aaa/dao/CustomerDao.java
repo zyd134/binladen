@@ -18,7 +18,7 @@ public interface CustomerDao {
 
     @Delete("delete from customer where id=#{id}")
     public void delCust(int id);
-
+    //修改
     @Update("update customer set customerNo=#{customerNo},contacts=#{contacts},tel=#{tel},address=#{address},email=#{email},bank=#{bank},bankAccount=#{bankAccount} where id=#{id}")
     public void updateCust(Customer customer);
 }
