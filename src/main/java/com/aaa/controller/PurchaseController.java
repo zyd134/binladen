@@ -72,7 +72,6 @@ public class PurchaseController {
     @RequestMapping("/selectPurOrderByStatus")
     @ResponseBody
     public List<Procurement> selectPurOrderByStatus(int status,String empNo){
-        System.out.println("jjjjjjjjjjj");
         return purchaseService.getProListByStatus(status,empNo);
     }
 }

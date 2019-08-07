@@ -64,4 +64,11 @@ public class GoodsServiceImpl implements GoodsService {
     public boolean addGood(Goods goods) {
         return goodsDao.addGood(goods);
     }
+
+    //更新商品库存
+
+    @Override
+    public boolean updGoodAccount(int number,String goodNo) {
+        return goodsDao.updGoodAccount(number,goodNo);
+    }
 }

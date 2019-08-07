@@ -47,10 +47,12 @@ public interface SaleDao {
     public boolean addSaleDetail(SaleDetail saleDetail);
 
     //根据客户编号获得客户已买商品
-    @Select("select g.* from goods g " +
-            "join sale s " +
-            "join sale_detail sd " +
-            "on s.saleNo = sd.saleNo and sd.goodNo = g.goodNo and s.customer = #{customerNo}")
+    @Select("select *,SUM(goodAmount) as totalAmount from (select g.*,gt.typeName as goodTypeName,s.saleNo,sd.goodAmount from goods g \n" +
+            "\t\t\t\t\t\tjoin sale s\n" +
+            "            join sale_detail sd \n" +
+            "            join goodtype gt \n" +
+            "            on s.saleNo = sd.saleNo and sd.goodNo = g.goodNo and s.customer = #{customerNo}\n" +
+            "\t\t\t\t\t\tGROUP BY s.saleNo,g.goodNo) as goodform GROUP BY goodNo")
     public List<Goods> getGoodListByCustomerNo(String customerNo);
 
 

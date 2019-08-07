@@ -2,6 +2,7 @@ package com.aaa.controller;
 
 import com.aaa.entity.*;
 import com.aaa.service.CustomerService;
+import com.aaa.service.GoodsService;
 import com.aaa.service.SaleService;
 import com.aaa.utils.NumberUtil;
 import net.sf.json.JSONArray;
@@ -26,6 +27,9 @@ public class SaleController {
 
     @Resource
     private CustomerService customerService;
+
+    @Resource
+    private GoodsService goodsService;
 
     //获得销售订单列表
     @RequestMapping("/getSaleOrderList")
@@ -144,6 +148,9 @@ public class SaleController {
             for(int i=0;i<goodArr.size();i++){
                 JSONObject obj=goodArr.getJSONObject(i);
                 srd=(SaleReturnDetail) JSONObject.toBean(obj,SaleReturnDetail.class);
+                if(goodsService.updGoodAccount(-(srd.getGoodAmount()),srd.getGoodNo())){
+                    System.out.println("更新库存成功");
+                }
                 srd.setSaleReturnNo(sr.getReturnNo());
                 if(saleService.addSaleReturnOrderDetail(srd)){
                     System.out.println("添加销售退货订单明细成功");
