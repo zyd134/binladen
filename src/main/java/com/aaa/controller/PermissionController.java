@@ -62,6 +62,11 @@ public class PermissionController {
         return "houtai/ceshi";
     }
 
+    @RequestMapping("toGetApplyOrder")
+    public String toGetApplyOrder(){
+        return "houtai/getApplyOrder";
+    }
+
     @RequestMapping("toSelectPro")
     public String toSelectPro(){
         return "houtai/selectPro";

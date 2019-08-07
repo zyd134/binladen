@@ -25,4 +25,9 @@ public class ProcurementServiceImpl implements ProcurementService {
     public List<Map> selectDic() {
         return procurementDao.selectDic();
     }
+
+    @Override
+    public List<Map> selectDet(String procurementNo) {
+        return procurementDao.selectDet(procurementNo);
+    }
 }
