@@ -248,13 +248,13 @@
                                 "                                <td>"+data[i].salePerson+"</td>\n" +
                                 "                                <td>"+data[i].s_explain+"</td>\n" +
                                 "                                <td>"+data[i].salePrice+"</td>\n" +
-                                "                                <td>"+data[i].statusName+"</td>\n" +
-                                "                            </tr>";
+                                "                                <td>"+data[i].statusName+"</td>\n" ;
                                     if(status==2){
                                         tr+="<td>" +
                                             "<button saleNo="+data[i].saleNo+" class=\"recheckbtn btn btn-primary btn-sm\">请求重审</button>" +
                                             "</td>"
                                     }
+                                    tr+="                            </tr>";
                                 tr+="<tr index="+i+">\n" +
                                 "                                        <th>商品编号</th>\n" +
                                 "                                        <th>商品名</th>\n" +

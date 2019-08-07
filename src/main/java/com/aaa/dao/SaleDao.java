@@ -1,7 +1,6 @@
 package com.aaa.dao;
 
-import com.aaa.entity.Sale;
-import com.aaa.entity.SaleDetail;
+import com.aaa.entity.*;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
@@ -39,11 +38,31 @@ public interface SaleDao {
     public boolean updSaleStatusByNo(@Param("status") int status, @Param("saleNo") String saleNo);
 
 
-    //添加采购订单
-    @Insert("insert into sale(saleNo,saleTime,salePerson,applyDepartment,s_explain,salePrice)values(#{saleNo},#{saleTime},#{salePerson},#{applyDepartment},#{s_explain},#{salePrice})")
+    //添加销售订单
+    @Insert("insert into sale(saleNo,saleTime,salePerson,applyDepartment,s_explain,salePrice,customer)values(#{saleNo},#{saleTime},#{salePerson},#{applyDepartment},#{s_explain},#{salePrice},#{customer})")
     public boolean addSale(Sale sale);
 
-    //添加采购订单明细
+    //添加销售订单明细
     @Insert("insert into sale_detail(saleNo,goodNo,goodAmount,totalPrice)values(#{saleNo},#{goodNo},#{goodAmount},#{totalPrice})")
     public boolean addSaleDetail(SaleDetail saleDetail);
+
+    //根据客户编号获得客户已买商品
+    @Select("select g.* from goods g " +
+            "join sale s " +
+            "join sale_detail sd " +
+            "on s.saleNo = sd.saleNo and sd.goodNo = g.goodNo and s.customer = #{customerNo}")
+    public List<Goods> getGoodListByCustomerNo(String customerNo);
+
+
+    /**
+     * 下面是销售退货的方法
+     */
+
+    //添加销售退货单
+    @Insert("insert into sale_return(returnNo,returnDay,operator,handlePerson,customer,returnPrice) values(#{returnNo},#{returnDay},#{operator},#{handlePerson},#{customer},#{returnPrice})")
+    public boolean addSaleReturnOrder(SaleReturn saleReturn);
+
+    //添加销售退货订单明细
+    @Insert("insert into sale_return_detail(saleReturnNo,goodNo,goodAmount) values(#{saleReturnNo},#{goodNo},#{goodAmount})")
+    public boolean addSaleReturnOrderDetail(SaleReturnDetail saleReturnDetail);
 }

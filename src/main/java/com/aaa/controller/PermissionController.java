@@ -2,6 +2,7 @@ package com.aaa.controller;
 
 import com.aaa.entity.Employees;
 import com.aaa.service.PermissionService;
+import com.aaa.service.SupplierService;
 import com.aaa.utils.NumberUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +20,9 @@ import java.util.Map;
 public class PermissionController {
     @Autowired
     private PermissionService permissionService;
+
+    @Resource
+    private SupplierService supplierService;
 
     @RequestMapping("toBackIndex")
     public String toBackIndex(){
@@ -47,6 +52,7 @@ public class PermissionController {
     @RequestMapping("toBuyIn")
     public String toBuyIn(Model model){
         model.addAttribute("purNo","CGDD"+NumberUtil.createNum());
+        model.addAttribute("supplierList",supplierService.getAllSupplierList());
         return "houtai/buyIn";
     }
 

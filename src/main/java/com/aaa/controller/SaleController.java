@@ -1,7 +1,7 @@
 package com.aaa.controller;
 
-import com.aaa.entity.Sale;
-import com.aaa.entity.SaleDetail;
+import com.aaa.entity.*;
+import com.aaa.service.CustomerService;
 import com.aaa.service.SaleService;
 import com.aaa.utils.NumberUtil;
 import net.sf.json.JSONArray;
@@ -23,6 +23,9 @@ import java.util.Map;
 public class SaleController {
     @Resource
     private SaleService saleService;
+
+    @Resource
+    private CustomerService customerService;
 
     //获得销售订单列表
     @RequestMapping("/getSaleOrderList")
@@ -62,6 +65,7 @@ public class SaleController {
     @RequestMapping("/toCreateSaleOrder")
     public String toCreateSaleOrder(Model model){
         model.addAttribute("saleNo","XSDD"+NumberUtil.createNum());
+        model.addAttribute("customerList",customerService.query());
         return "houtai/createSaleOrder";
     }
 
@@ -78,6 +82,7 @@ public class SaleController {
         sale.setApplyDepartment(order.getString("applydept"));
         sale.setS_explain(order.getString("explain"));
         sale.setSalePrice(order.getDouble("salePrice"));
+        sale.setCustomer(order.getString("customer"));
         JSONArray goodArr = order.getJSONArray("goods");
 
         if(saleService.addSale(sale)){
@@ -99,4 +104,58 @@ public class SaleController {
 
 
     }
+
+    //跳转到销售退货界面
+    @RequestMapping("/toSaleReturn")
+    public String toSaleReturn(Model model){
+        model.addAttribute("saleReturnNo","XSTH"+NumberUtil.createNum());
+        model.addAttribute("customerList",customerService.query());
+        return "houtai/saleReturn";
+    }
+
+    //根据客户编号获得客户已买商品
+    @RequestMapping("/getGoodListByCustomerNo")
+    @ResponseBody
+    public List<Goods> getGoodListByCustomerNo(String customerNo){
+        return saleService.getGoodListByCustomerNo(customerNo);
+    }
+
+
+    /**
+     * 销售退货方法
+     */
+    //添加销售退货订单
+    @RequestMapping("/addSaleReturnOrder")
+    @ResponseBody
+    public void addSaleReturnOrder(@RequestBody JSONObject order){
+        SaleReturn sr = new SaleReturn();
+        SaleReturnDetail srd=new SaleReturnDetail();
+        sr.setReturnNo(order.getString("returnNo"));
+        sr.setOperator(order.getString("operator"));
+        sr.setCustomer(order.getString("customer"));
+        sr.setHandlePerson(order.getString("handlePerson"));
+        sr.setReturnDay(new Date());
+        sr.setReturnPrice(order.getDouble("returnPrice"));
+        JSONArray goodArr = order.getJSONArray("goods");
+
+        if(saleService.addSaleReturnOrder(sr)){
+            System.out.println("添加销售退货订单成功");
+
+            for(int i=0;i<goodArr.size();i++){
+                JSONObject obj=goodArr.getJSONObject(i);
+                srd=(SaleReturnDetail) JSONObject.toBean(obj,SaleReturnDetail.class);
+                srd.setSaleReturnNo(sr.getReturnNo());
+                if(saleService.addSaleReturnOrderDetail(srd)){
+                    System.out.println("添加销售退货订单明细成功");
+                }else{
+                    System.out.println("添加销售退货订单明细失败");
+                }
+            }
+        }else{
+            System.out.println("添加销售退货订单失败");
+        }
+
+
+    }
+
 }

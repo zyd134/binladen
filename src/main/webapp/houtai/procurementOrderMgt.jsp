@@ -19,7 +19,7 @@
     <li class="select" status="2"><a href="#ios" data-toggle="tab">已通过</a></li>
     <li class="select" status="4"><a href="#notpay" data-toggle="tab">未付款</a></li>
     <li class="select" status="5"><a href="#payed" data-toggle="tab">已付款</a></li>
-    <li class="select" status="8"><a href="#sto_in" data-toggle="tab">未验收</a></li>
+    <li class="select" status="7"><a href="#sto_in" data-toggle="tab">已采购未付款</a></li>
     <li class="select" status="6"><a href="#finish" data-toggle="tab">已完成</a></li>
 </ul>
 <div id="myTabContent" class="tab-content">
@@ -113,6 +113,7 @@
                                 <th>说明</th>
                                 <th>采购总价</th>
                                 <th>订单状态</th>
+                                <th>操作</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -148,6 +149,7 @@
                                 <th>说明</th>
                                 <th>采购总价</th>
                                 <th>订单状态</th>
+                                <th>操作</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -172,7 +174,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>已付款订单</h2>
+                        <h2>已完成订单</h2>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
@@ -210,7 +212,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>未验收订单</h2>
+                        <h2>已采购未付款订单</h2>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
@@ -224,6 +226,7 @@
                                 <th>说明</th>
                                 <th>采购总价</th>
                                 <th>订单状态</th>
+                                <th>操作</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -275,6 +278,17 @@
                                     if(status==3){
                                         tr+="<td>" +
                                             "<button class=\"recheckbtn btn btn-primary btn-sm\">请求重审</button>" +
+                                            "</td>"
+                                    }
+                                    if(status==5){
+                                        tr+="<td>" +
+                                            "<button pNo="+data[i].procurementNo+" class=\"buybtn btn btn-primary btn-sm\">去采购</button>" +
+                                            "</td>"
+                                    }
+
+                                    if(status==4 || status==7){
+                                        tr+="<td>" +
+                                            "<button  class=\"toldbuybtn btn btn-primary btn-sm\">催付款</button>" +
                                             "</td>"
                                     }
                                tr+= "                            </tr>"+
@@ -330,6 +344,16 @@
                                             "<button pNo="+data[i].procurementNo+" class=\"recheckbtn btn btn-primary btn-sm\">请求重审</button>" +
                                             "</td>"
                                     }
+                                    if(statusflag==5){
+                                        tr+="<td>" +
+                                            "<button pNo="+data[i].procurementNo+" class=\"buybtn btn btn-primary btn-sm\">去采购</button>" +
+                                            "</td>"
+                                    }
+                                    if(statusflag==4 || statusflag==7){
+                                        tr+="<td>" +
+                                            "<button  class=\"toldbuybtn btn btn-primary btn-sm\">催付款</button>" +
+                                            "</td>"
+                                    }
                             tr+="                            </tr>"+
                             "<tr index="+i+">\n" +
                             "                                        <th>商品编号</th>\n" +
@@ -357,7 +381,6 @@
         $("tbody").on("click",".recheckbtn",function(){
             var obj=$(this);
             var pNo =obj.attr("pNo");
-            alert(pNo)
             $.ajax({
                 url:"pro/updPOrderStatusByNo",
                 type:"post",
@@ -378,6 +401,39 @@
                     }
                 }
             })
+        })
+
+
+        //去采购
+        $("tbody").on("click",".buybtn",function(){
+            var obj=$(this);
+            var pNo =obj.attr("pNo");
+            $.ajax({
+                url:"pro/updPOrderStatusByNo",
+                type:"post",
+                data:{status:6,pNo:pNo},
+                datatype:"json",
+                success:function (data) {
+                    if(data.result=="success"){
+                        alert("采购完成！");
+                        obj.parents("tr").remove();
+                        var index = obj.parents("tr").attr("index");
+                        $("tr").each(function(){
+                            if($(this).attr("index")==index){
+                                $(this).remove();
+                            }
+                        })
+                    }else{
+                        alert("采购失败！");
+                    }
+                }
+            })
+        })
+
+
+        //催款
+        $("tbody").on("click",".toldbuybtn",function(){
+            alert("已提醒财务付款")
         })
     })
 </script>

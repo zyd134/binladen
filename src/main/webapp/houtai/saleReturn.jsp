@@ -3,7 +3,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <base>
 <base href="http://localhost:8080/binladen/">
-<title>采购</title>
+<title>销售</title>
 <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -11,32 +11,27 @@
 <body>
 <form role="form" class="form-inline">
     <div class="form-group">
-        <label for="purNo">流水号</label>
-        <input type="text" class="form-control" id="purNo" value="${purNo}" disabled="disabled">
+        <label for="returnNo">流水号</label>
+        <input type="text" class="form-control" id="returnNo" value="${saleReturnNo}" disabled="disabled">
     </div>
     <div class="form-group">
-        <label for="explain">说明</label>
-        <input type="text" class="form-control" id="explain" >
+        <label for="operator">申请人</label>
+        <input type="text" class="form-control" id="operator" value="${emp.name}" empNo="${emp.empNo}" readonly>
     </div>
     <div class="form-group">
-        <label for="caigouperson">申请人</label>
-        <input type="text" class="form-control" id="caigouperson" value="${emp.name}" empNo="${emp.empNo}" readonly>
-    </div>
-    <div class="form-group">
-        <label for="caigoudept">申请部门</label>
-        <input type="text" class="form-control" id="caigoudept" >
+        <label for="handlePerson">经手人</label>
+        <input type="text" class="form-control" id="handlePerson" >
     </div>
 
     <div class="form-group">
-        <label for="caigoudept">供应商</label>
-        <select id="supplier" class="form-control">
+        <label for="customer">客户</label>
+        <select id="customer" class="form-control">
             <option >请选择</option>
-            <c:forEach var="sup" items="${supplierList}">
-                <option value="${sup.supplierNo}">${sup.supplierName}</option>
+            <c:forEach var="customer" items="${customerList}">
+                <option value="${customer.customerNo}">${customer.customerName}</option>
             </c:forEach>
         </select>
     </div>
-
 </form>
 <button id="btn" class="btn btn-success btn-sm">添加商品</button><br><br>
 <table  class="table">
@@ -47,7 +42,7 @@
         <th>商品类别</th>
         <th>规格型号</th>
         <th>计量单位</th>
-        <th>进货价格</th>
+        <th>销售价格</th>
         <th>数量</th>
         <th>库存总数</th>
         <th>小计(￥元)</th>
@@ -89,10 +84,12 @@
     //动态读取商品信息
     var goods;
     function getGoods(){
+        var customerNo = $("#customer").val();
         $.ajax({
-            url:"goods/selectGoods",
+            url:"sale/getGoodListByCustomerNo",
             contextType:"application/json",
             type:"post",
+            data:{customerNo:customerNo},
             dataType:"json",
             success:function(data) {
                 goods=data;
@@ -108,6 +105,7 @@
             }
         })
     }
+
     //因为下拉框时动态生成的，所有不能直接使用change,B必须使用时间绑定
     //下拉框改变时，将对应的商品信息查询出来记载到对应的td中
     $("#mytbd").on("change",".goodsname",function(){
@@ -120,7 +118,7 @@
                 $(this).parent().parent().children("td").eq(2).text(goods[i].typeName);
                 $(this).parent().parent().children("td").eq(3).text(goods[i].goodSpecs);
                 $(this).parent().parent().children("td").eq(4).text(goods[i].unit);
-                $(this).parent().parent().children("td").eq(5).text(goods[i].purchasePrice);
+                $(this).parent().parent().children("td").eq(5).text(goods[i].salePrice);
                 $(this).parent().parent().children("td").eq(7).text(goods[i].acount);
 
             }
@@ -147,13 +145,12 @@
 
     //点击提交按钮时
     $("#submit").click(function () {
-        var purNo=$("#purNo").val();
-        var explain = $("#explain").val();//说明
-        var applyperson=$("#caigouperson").attr("empNo");//采购人
-        var applydept=$("#caigoudept").val();//申请部门
+        var returnNo=$("#returnNo").val();//退货订单号
+        var operator = $("#operator").attr("empNo");//操作人
+        var handlePerson=$("#handlePerson").val();//经手人
+        var customer=$("#customer").val();//客户
         var goodsarr=new Array();//采购商品的集合
-        var purchasePrice=0;
-        var supplier=$("#supplier").val();//供应商
+        var returnPrice=0;
         //获取所有的订单详情
         $("#mytbd tr").each(function () {
             //每一行都是一个对象
@@ -161,21 +158,21 @@
             goods.goodNo=$(this).children("td").eq(0).text();
             goods.goodAmount=$(this).find("input").val();
             goods.totalPrice=$(this).children("td").eq(8).text();
-            purchasePrice+=parseInt(goods.totalPrice);
+            returnPrice+=parseInt(goods.totalPrice);
             goodsarr.push(goods);//将当前对象存放到数组中
         })
-        var jsonstr={"purNo":purNo,"explain":explain,"applyperson":applyperson,"applydept":applydept,"purchasePrice":purchasePrice,"supplier":supplier,"goods":goodsarr}
-        alert(JSON.stringify(jsonstr))
+        var jsonstr={"returnNo":returnNo,"operator":operator,"handlePerson":handlePerson,"customer":customer,"returnPrice":returnPrice,"goods":goodsarr}
+        /*alert(JSON.stringify(jsonstr))*/
 
         $.ajax({
-            url:"pur/purchaseGood",
+            url:"sale/addSaleReturnOrder",
             type:"post",
             data:JSON.stringify(jsonstr),
             contentType:"application/json;charset=UTF-8",
             accept:"/",
             success:function () {
                 console.log("success")
-                alert("订单生成成功")
+                alert("退货成功")
             }
         });
     })

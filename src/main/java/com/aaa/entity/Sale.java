@@ -26,6 +26,8 @@ public class Sale {
     private int status;
     //订单状态名
     private String statusName;
+    //客户编号
+    private String customer;
     //订单明细集合
     private List<SaleDetail> saleDetailList;
 
@@ -107,6 +109,14 @@ public class Sale {
 
     public void setStatusName(String statusName) {
         this.statusName = statusName;
+    }
+
+    public String getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(String customer) {
+        this.customer = customer;
     }
 
     public List<SaleDetail> getSaleDetailList() {

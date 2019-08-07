@@ -26,6 +26,16 @@
         <label for="saledept">申请部门</label>
         <input type="text" class="form-control" id="saledept" >
     </div>
+
+    <div class="form-group">
+        <label for="customer">客户</label>
+        <select id="customer" class="form-control">
+            <option >请选择</option>
+            <c:forEach var="customer" items="${customerList}">
+                <option value="${customer.customerNo}">${customer.customerName}</option>
+            </c:forEach>
+        </select>
+    </div>
 </form>
 <button id="btn" class="btn btn-success btn-sm">添加商品</button><br><br>
 <table  class="table">
@@ -142,6 +152,7 @@
         var saledept=$("#saledept").val();//申请部门
         var goodsarr=new Array();//采购商品的集合
         var salePrice=0;
+        var customer=$("#customer").val();
         //获取所有的订单详情
         $("#mytbd tr").each(function () {
             //每一行都是一个对象
@@ -152,7 +163,7 @@
             salePrice+=parseInt(goods.totalPrice);
             goodsarr.push(goods);//将当前对象存放到数组中
         })
-        var jsonstr={"saleNo":saleNo,"explain":explain,"applyperson":saleperson,"applydept":saledept,"salePrice":salePrice,"goods":goodsarr}
+        var jsonstr={"saleNo":saleNo,"explain":explain,"applyperson":saleperson,"applydept":saledept,"salePrice":salePrice,"customer":customer,"goods":goodsarr}
         /*alert(JSON.stringify(jsonstr))*/
 
         $.ajax({

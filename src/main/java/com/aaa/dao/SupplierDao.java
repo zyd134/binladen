@@ -13,6 +13,9 @@ public interface SupplierDao {
     @Select("select * from supplier LIMIT #{currentPage},#{pageSize}")
     public List<Supplier> getSupplierList(@Param("currentPage") int currentPage, @Param("pageSize") int pageSize);
 
+    @Select("select * from supplier")
+    public List<Supplier> getAllSupplierList();
+
     //获得供应商总数
     @Select("select count(id) from supplier")
     public int getCountOfSupplier();
