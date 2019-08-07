@@ -2,10 +2,12 @@ package com.aaa.controller;
 
 import com.aaa.entity.Goods;
 import com.aaa.service.GoodsService;
+import com.aaa.service.StorageService;
 import com.aaa.utils.NumberUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -19,6 +21,8 @@ public class GoodsController {
 
     @Resource
     private GoodsService goodsService;
+    @Resource
+    private StorageService storageService;
 
     @RequestMapping("/selectGoods")
     @ResponseBody
@@ -26,10 +30,31 @@ public class GoodsController {
         return goodsService.queryGoods();
     }
 
+    //查询仓库名
+    @RequestMapping("/selectSto")
+    @ResponseBody
+    public List<Map> selectSto(){
+        return storageService.selectSto();
+    }
+
+    //盘点
+    @RequestMapping("/selectStoGoods")
+    @ResponseBody
+    public List<Map> selectStoGoods(@RequestParam(value = "storageNo",required = false) String storageNo){
+        return storageService.selectStoGoods(storageNo);
+    }
+
     //跳转到采购页面
     @RequestMapping("/toBuyIn")
     public String toRe(){
         return "houtai/buyIn";
+
+    }
+
+    //跳转到盘点页面
+    @RequestMapping("/checkGoods")
+    public String toCheckGoods(){
+        return "houtai/checkGoods";
 
     }
 
