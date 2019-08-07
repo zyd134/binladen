@@ -55,6 +55,8 @@
     $(".form-inline").on('change',".selectSto",function(){
         var storageNo = $(this).val();
         alert(storageNo);
+        document.getElementById("mytbd").innerHTML = "";
+        acounts=0;
         $.ajax({
             url:"goods/selectStoGoods",
             type:"post",
