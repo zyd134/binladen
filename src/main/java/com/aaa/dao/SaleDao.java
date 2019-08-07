@@ -11,7 +11,12 @@ import java.util.List;
 @Repository
 public interface SaleDao {
     //查询采购订单
-    @Select("select * from sale where status = #{status}")
+    @Select({"<script>",
+            "select * from sale where status = #{status}" +
+                    "<when test='empNo!=0'>",
+                        " and salePerson = #{empNo}",
+                    "</when>",
+            "</script>"})
     @Results({
             @Result(property = "saleNo",column = "saleNo"),
             @Result(property = "statusName",column = "status",
@@ -19,7 +24,7 @@ public interface SaleDao {
             @Result(property = "saleDetailList", column = "saleNo",
                     many = @Many(select = "com.aaa.dao.SaleDao.getSaleDetailListBySaleNo"))
     })
-    public List<Sale> getSaleListByStatus(int status);
+    public List<Sale> getSaleListByStatus(@Param("status") int status,@Param("empNo") String empNo);
 
     //通过订单编号查询订单明细
     @Select("select * from sale_detail sd join goods g on sd.goodNo = g.goodNo where saleNo=#{saleNo}")

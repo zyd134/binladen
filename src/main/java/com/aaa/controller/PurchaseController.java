@@ -23,8 +23,7 @@ public class PurchaseController {
     private PurchaseService purchaseService;
 
     @RequestMapping("/toPurOrderPay")
-    public String toPurOrderPay(int status,Model model){
-        model.addAttribute("procurementList",purchaseService.getProListByStatus(status));
+    public String toPurOrderPay(){
         return "houtai/purchaseOrderPay";
     }
 
@@ -65,15 +64,14 @@ public class PurchaseController {
 
     //查询采购订单
     @RequestMapping("/selectPurOrder")
-    public String selectPurOrder(int status,Model model){
-        model.addAttribute("procurementList",purchaseService.getProListByStatus(status));
+    public String selectPurOrder(){
         return "houtai/procurementOrderMgt";
     }
 
     @RequestMapping("/selectPurOrderByStatus")
     @ResponseBody
-    public List<Procurement> selectPurOrderByStatus(int status){
-//        System.out.println("jjjjjjjjjjj");
-        return purchaseService.getProListByStatus(status);
+    public List<Procurement> selectPurOrderByStatus(int status,String empNo){
+        System.out.println("jjjjjjjjjjj");
+        return purchaseService.getProListByStatus(status,empNo);
     }
 }

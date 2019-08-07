@@ -16,8 +16,8 @@ public class SaleServiceImpl implements SaleService {
 
     //查询采购订单
     @Override
-    public List<Sale> getSaleListByStatus(int status) {
-        return saleDao.getSaleListByStatus(status);
+    public List<Sale> getSaleListByStatus(int status,String empNo) {
+        return saleDao.getSaleListByStatus(status,empNo);
     }
 
     //通过订单编号查询订单明细

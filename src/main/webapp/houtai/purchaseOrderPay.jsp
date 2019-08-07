@@ -42,47 +42,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <c:forEach var="procure" items="${procurementList}" varStatus="status" >
-                                    <tr index="${status.index}">
-                                        <td>${procure.procurementNo}</td>
-                                        <td><fmt:formatDate value="${procure.purchaseTime}" pattern="yyyy-MM-dd" /></td>
-                                        <td>${procure.purchaser}</td>
-                                        <td>${procure.p_explain}</td>
-                                        <td>${procure.purchasePrice}</td>
-                                        <td>${procure.statusName}</td>
-                                        <td>
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-danger">操作</button>
-                                                <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="height: 34px">
-                                                    <span class="caret"></span>
-                                                    <span class="sr-only">Toggle Dropdown</span>
-                                                </button>
-                                                <ul class="dropdown-menu" role="menu">
-                                                    <li  class="paybtn" pNo="${procure.procurementNo}"><a>付款</a>
-                                                    </li>
-                                                    <li class="notpaybtn" pNo="${procure.procurementNo}"><a>先采购再付款</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </td>
-                                    </tr>
 
-                                    <tr index="${status.index}">
-                                        <th>商品编号</th>
-                                        <th>商品名</th>
-                                        <th>商品数量</th>
-                                        <th>总价</th>
-                                    </tr>
-
-                                    <c:forEach var="pdList" items="${procure.purchaseDetailList}">
-                                        <tr index="${status.index}">
-                                            <td>${pdList.goodNo}</td>
-                                            <td>${pdList.goodName}</td>
-                                            <td>${pdList.goodAmount}</td>
-                                            <td>${pdList.totalPrice}</td>
-                                        </tr>
-                                    </c:forEach>
-                                </c:forEach>
                             </tbody>
                         </table>
 
@@ -146,6 +106,66 @@
     $(document).ready(function(){
         var statusflag=4;
 
+        //进来就查询
+        $.ajax({
+            url:"pur/selectPurOrderByStatus",
+            type:"post",
+            data:{status:4,empNo:0},
+            datatype:"json",
+            success:function(data){
+                    for(var i=0;i<data.length;i++){
+                        var tr="<tr index="+i+" style=\"background-color: #d4edda\">\n" +
+                            "                                <td>"+data[i].procurementNo+"</td>\n" +
+                            "                                <td>"+data[i].purchaseTime+"</td>\n"+
+                            "                                <td>"+data[i].purchaser+"</td>\n" +
+                            "                                <td>"+data[i].p_explain+"</td>\n" +
+                            "                                <td>"+data[i].purchasePrice+"</td>\n" +
+                            "                                <td>"+data[i].statusName+"</td>\n" ;
+
+
+                        tr+="<td>\n" +
+                            "                                        <div class=\"btn-group\">\n" +
+                            "                                            <button type=\"button\" class=\"btn btn-danger\">操作</button>\n" +
+                            "                                            <button type=\"button\" class=\"btn btn-danger dropdown-toggle\" data-toggle=\"dropdown\" aria-expanded=\"false\" style=\"height: 34px\">\n" +
+                            "                                                <span class=\"caret\"></span>\n" +
+                            "                                                <span class=\"sr-only\">Toggle Dropdown</span>\n" +
+                            "                                            </button>\n" +
+                            "                                            <ul class=\"dropdown-menu\" role=\"menu\">\n" +
+                            "                                                <li class=\"paybtn\" pNo=\""+data[i].procurementNo+"\"><a>付款</a>\n" ;
+                        if(status!=7){
+                            tr+= "                                                </li>\n"+
+                                "                                                <li class=\"notpaybtn\" pNo=\""+data[i].procurementNo+"\"><a >先采购再付款</a>\n" +
+                                "                                                </li>\n";
+                        }
+
+                        tr+="                                            </ul>\n" +
+                            "                                        </div>\n" +
+                            "                                    </td>";
+                        tr+="                            </tr>"+
+                            "<tr index="+i+">\n" +
+                            "                                        <th>商品编号</th>\n" +
+                            "                                        <th>商品名</th>\n" +
+                            "                                        <th>商品数量</th>\n" +
+                            "                                        <th>总价</th>\n" +
+                            "                                    </tr>";
+                        for(var j=0;j<data[i].purchaseDetailList.length;j++){
+                            tr+="<tr index="+i+">\n" +
+                                "                                            <td>"+data[i].purchaseDetailList[j].goodNo+"</td>\n" +
+                                "                                            <td>"+data[i].purchaseDetailList[j].goodName+"</td>\n" +
+                                "                                            <td>"+data[i].purchaseDetailList[j].goodAmount+"</td>\n" +
+                                "                                            <td>"+data[i].purchaseDetailList[j].totalPrice+"</td>\n" ;
+
+
+                            tr+="                                        </tr>";
+                        }
+                        $("tbody:first").append(tr);
+
+                }
+
+
+            }
+        })
+
 
         $(".select").click(function(){
             var obj= $(this);
@@ -154,12 +174,12 @@
             $.ajax({
                 url:"pur/selectPurOrderByStatus",
                 type:"post",
-                data:{status:status},
+                data:{status:status,empNo:0},
                 datatype:"json",
                 success:function(data){
                     if(statusflag!=status){
                         for(var i=0;i<data.length;i++){
-                            var tr="<tr index="+i+">\n" +
+                            var tr="<tr index="+i+" style=\"background-color: #d4edda\">\n" +
                                 "                                <td>"+data[i].procurementNo+"</td>\n" +
                                 "                                <td>"+data[i].purchaseTime+"</td>\n"+
                                 "                                <td>"+data[i].purchaser+"</td>\n" +
@@ -256,7 +276,7 @@
                 datatype:"json",
                 success:function (data) {
                     if(data.result=="success"){
-                        alert("付款成功！");
+                        alert("已通知进行采购！");
                         var index = obj.parents("tr").attr("index");
                         obj.parents("tr").remove();
                         $("tr").each(function(){
@@ -265,7 +285,7 @@
                             }
                         })
                     }else{
-                        alert("付款失败！");
+                        alert("失败！");
                     }
                 }
             })
