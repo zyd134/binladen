@@ -19,6 +19,8 @@ public class Procurement {
     private int status;
     //状态名
     private String statusName;
+    //供应商编号
+    private String supplier;
     //订单商品明细列表
     private List<PurchaseDetail> purchaseDetailList;
 
@@ -93,6 +95,14 @@ public class Procurement {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public String getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(String supplier) {
+        this.supplier = supplier;
     }
 
     public List<PurchaseDetail> getPurchaseDetailList() {

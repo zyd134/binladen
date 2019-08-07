@@ -39,6 +39,7 @@ public class PurchaseController {
         procurement.setPurchaser(order.getString("applyperson"));
         procurement.setP_explain(order.getString("explain"));
         procurement.setPurchasePrice(order.getDouble("purchasePrice"));
+        procurement.setSupplier(order.getString("supplier"));
         JSONArray goodArr = order.getJSONArray("goods");
 
         if(purchaseService.addProcurement(procurement)){

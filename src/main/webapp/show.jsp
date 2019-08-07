@@ -19,13 +19,13 @@
     <thead>
     <tr>
         <th>
-            ID
-        </th>
-        <th>
             客户编码
         </th>
         <th>
-            姓名
+            客户名称
+        </th>
+        <th>
+            联系人
         </th>
         <th>
             电话
@@ -43,7 +43,7 @@
             银行卡号
         </th>
         <th>
-            操作
+        操作
         </th>
     </tr>
     </thead>
@@ -69,14 +69,15 @@
             </div>
             <div class="modal-body">
                 <form id="myform2" method="post">
-                    I&nbsp;&nbsp;&nbsp;&nbsp;D：<input class="id" id="id" name="id" readonly/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    编码：<input class="customerNo" id="customerNo" name="customerNo" /><br><br>
-                    姓名：<input class="contacts" id="contacts" name="contacts"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    电话：<input class="tel" id="tel" name="tel" /><br><br>
-                    地址：<input class="address" id="address" name="address" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    邮箱：<input class="email" id="email" name="email" /><br><br>
-                    银行：<input class="bank" id="bank" name="bank" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    卡号：<input class="bankAccount" id="bankAccount" name="bankAccount" /><br><br>
+                    <input name="id" class="id" id="id" style="display: none"/>
+                    编码：<input class="customerNo" id="customerNo" name="customerNo" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    名称：<input class="customerName" id="name" name="customerName"/><br><br>
+                    联系人：<input class="contacts" id="contacts" name="contacts"/><br><br>
+                    电话：<input class="tel" id="tel" name="tel" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    地址：<input class="address" id="address" name="address" /><br><br>
+                    邮箱：<input class="email" id="email" name="email" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    银行：<input class="bank" id="bank" name="bank" /><br><br>
+                    卡号：<input class="bankAccount" id="bankAccount" name="bankAccount" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 </form>
             </div>
             <div class="modal-footer">
@@ -105,7 +106,8 @@
             <div class="modal-body">
                 <form id="myform3" method="post">
                     编码：<input class="customerNo" id="customerNo" name="customerNo" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    姓名：<input class="contacts" id="contacts" name="contacts"/><br><br>
+                    名称：<input class="customerName" id="customerName" name="customerName" /><br><br>
+                    联系人：<input class="contacts" id="contacts" name="contacts"/><br><br>
                     电话：<input class="tel" id="tel" name="tel" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     地址：<input class="address" id="address" name="address" /><br><br>
                     邮箱：<input class="email" id="email" name="email" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -133,6 +135,7 @@
 <script>
     //页面加载完成时
     $(function () {
+        var id;
         query();
         //queryCla();
     })
@@ -146,9 +149,10 @@
                 //每次加载之前请空表格的内容
                 document.getElementById("mytbd").innerHTML="";
                 for (var i=0;i<data.length;i++){
+                    id=data[i].id;
                     var tr="<tr>\n" +
-                        "<td>"+data[i].id+"</td>\n" +
                         "<td>"+data[i].customerNo+"</td>\n" +
+                        "<td>"+data[i].customerName+"</td>\n" +
                         "<td>"+data[i].contacts+"</td>\n" +
                         "<td>"+data[i].tel+"</td>\n" +
                         "<td>"+data[i].address+"</td>\n" +
@@ -182,20 +186,31 @@
             data:{"id":val},
             dataType:"text",
             success:function (data) {
-                alert("delCust##############");
-                query();
+                    alert("delCust##############");
+                    query();
             }
         });
 
     }
 
-    //
+    //添加学生
+    // btn.onclick=function () {
+    //     $.ajax({
+    //         url:"addCust",
+    //         type:"post",
+    //         data:$("#myform3").serialize(),//将表单序列化提交，将表单中的数据全部提交
+    //         success:function (data) {
+    //             query();
+    //         }
+    //     });
+    // }
+
     //点击修改时需要将被点击行的数据填充到from中
     $("#mytbd").on("click",".update",function () {
         //节点
-        alert($(this).parent().parent().parent().parent().parent().children(0).html());
-        $(".id").val($(this).parent().parent().parent().parent().parent().find("td").eq(0).html());
-        $(".customerNo").val($(this).parent().parent().parent().parent().parent().find("td").eq(1).html());
+        $(".id").val(id);
+        $(".customerNo").val($(this).parent().parent().parent().parent().parent().find("td").eq(0).html());
+        $(".customerName").val($(this).parent().parent().parent().parent().parent().find("td").eq(1).html());
         $(".contacts").val($(this).parent().parent().parent().parent().parent().find("td").eq(2).html());
         $(".tel").val($(this).parent().parent().parent().parent().parent().find("td").eq(3).html());
         $(".address").val($(this).parent().parent().parent().parent().parent().find("td").eq(4).html());

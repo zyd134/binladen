@@ -1,8 +1,7 @@
 package com.aaa.service;
 
 import com.aaa.dao.SaleDao;
-import com.aaa.entity.Sale;
-import com.aaa.entity.SaleDetail;
+import com.aaa.entity.*;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -48,5 +47,28 @@ public class SaleServiceImpl implements SaleService {
     @Override
     public boolean addSaleDetail(SaleDetail saleDetail){
         return saleDao.addSaleDetail(saleDetail);
+    };
+
+    //根据客户编号获得客户已买商品
+    @Override
+    public List<Goods> getGoodListByCustomerNo(String customerNo) {
+        return saleDao.getGoodListByCustomerNo(customerNo);
+    }
+
+
+    /**
+     * 销售退货
+     */
+
+    //添加销售退货单
+    @Override
+    public boolean addSaleReturnOrder(SaleReturn saleReturn){
+        return saleDao.addSaleReturnOrder(saleReturn);
+    };
+
+    //添加销售退货订单明细
+    @Override
+    public boolean addSaleReturnOrderDetail(SaleReturnDetail saleReturnDetail){
+        return saleDao.addSaleReturnOrderDetail(saleReturnDetail);
     };
 }

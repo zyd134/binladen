@@ -1,12 +1,11 @@
 package com.aaa.service;
 
-import com.aaa.entity.Sale;
-import com.aaa.entity.SaleDetail;
+import com.aaa.entity.*;
 
 import java.util.List;
 
 public interface SaleService {
-    //查询采购订单
+    //查询销售订单
     public List<Sale> getSaleListByStatus(int status,String empNo);
 
     //通过订单编号查询订单明细
@@ -17,9 +16,19 @@ public interface SaleService {
 
     public boolean updSaleStatusByNo(int status,String saleNo);
 
-    //添加采购订单
+    //添加销售订单
     public boolean addSale(Sale sale);
 
-    //添加采购订单明细
+    //添加销售订单明细
     public boolean addSaleDetail(SaleDetail saleDetail);
+
+    //根据客户编号获得客户已买商品
+    public List<Goods> getGoodListByCustomerNo(String customerNo);
+
+
+    //添加销售退货单
+    public boolean addSaleReturnOrder(SaleReturn saleReturn);
+
+    //添加销售退货订单明细
+    public boolean addSaleReturnOrderDetail(SaleReturnDetail saleReturnDetail);
 }

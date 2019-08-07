@@ -13,13 +13,12 @@ public interface CustomerDao {
     @Select("select * from customer")
     public List<Map> query();
 
-    @Insert("insert into customer values (#{id},#{customerNo},#{contacts},#{tel},#{address},#{email},#{bank},#{bankAccount})")
+    @Insert("insert into customer values (#{id},#{customerNo},#{customerName},#{contacts},#{tel},#{address},#{email},#{bank},#{bankAccount})")
     public void addCust(Customer customer);
 
-    //
     @Delete("delete from customer where id=#{id}")
     public void delCust(int id);
-    //修改
-    @Update("update customer set customerNo=#{customerNo},contacts=#{contacts},tel=#{tel},address=#{address},email=#{email},bank=#{bank},bankAccount=#{bankAccount} where id=#{id}")
+
+    @Update("update customer set customerNo=#{customerNo},customerName=#{customerName},contacts=#{contacts},tel=#{tel},address=#{address},email=#{email},bank=#{bank},bankAccount=#{bankAccount} where id=#{id}")
     public void updateCust(Customer customer);
 }
