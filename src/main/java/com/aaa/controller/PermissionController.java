@@ -24,6 +24,11 @@ public class PermissionController {
     @Resource
     private SupplierService supplierService;
 
+    @RequestMapping("toOutStock")
+    public String toOutStock(){
+        return "houtai/outStock";
+    }
+
     @RequestMapping("toBackIndex")
     public String toBackIndex(){
         return "houtai/backIndex";
