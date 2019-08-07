@@ -52,7 +52,7 @@
         getStorages();
     })
 
-    $(".selectSto").click(function(){
+    $(".form-inline").on('change',".selectSto",function(){
         var storageNo = $(this).val();
         alert(storageNo);
         $.ajax({
