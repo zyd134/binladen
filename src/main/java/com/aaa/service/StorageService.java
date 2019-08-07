@@ -19,4 +19,6 @@ public interface StorageService {
      * @return
      */
     public boolean insertSto(Map map);
+
+    public boolean updateAndInsert(String orderid,String goodNo,int size,String inNo,int goodAmount,String applyperson,String storageNo);
 }

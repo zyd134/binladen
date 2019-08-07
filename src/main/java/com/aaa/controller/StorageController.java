@@ -42,4 +42,15 @@ public class StorageController {
             return "false";
     }
 
+    @RequestMapping("updateAndInsert")
+    @ResponseBody
+    public String updateAndInsert(String orderid,String goodNo,int size,String inNo,int goodAmount,String applyperson,String storageNo){
+        boolean bn=storageService.updateAndInsert(orderid,goodNo,size,inNo,goodAmount,applyperson,storageNo);
+        if (bn){
+            return "true";
+        }else{
+            return "false";
+        }
+    }
+
 }
