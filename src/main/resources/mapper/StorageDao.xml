@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aaa.dao.StorageDao">
+    <select id="selectNo" resultType="java.util.Map" parameterType="java.util.Map">
+        select * from storage
+    </select>
+    <insert id="insertSto" parameterType="java.util.Map">
+    insert into storage_in(inNo,inTime,inPerson,delivery,storageNo)
+    values(#{inNo},now(),#{applyperson},null,#{storageNo})
+
+    </insert>
+    <insert id="insertStoDetail" parameterType="java.util.List">
+          insert into storage_in_detail(inNo,inGoodNo,goodAmount) values
+         <foreach collection="list" item="item" separator=",">
+             (#{item.productNo},#{item.storageNo},#{item.goodsNum})
+         </foreach>
+    </insert>
+
+
+</mapper>
