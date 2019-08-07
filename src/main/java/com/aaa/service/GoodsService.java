@@ -22,4 +22,7 @@ public interface GoodsService {
     public List<GoodType> getGoodTypeList();
 
     public boolean addGood(Goods goods);
+
+    //更新商品库存
+    public boolean updGoodAccount(int number,String goodNo);
 }

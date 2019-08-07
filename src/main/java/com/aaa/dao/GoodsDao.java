@@ -46,4 +46,8 @@ public interface GoodsDao {
     @Insert("insert into goods(goodNo,goodName,goodSpecs,goodType,purchasePrice,salePrice,retailPrice,originPlace,unit)" +
             "values(#{goodNo},#{goodName},#{goodSpecs},#{goodType},#{purchasePrice},#{salePrice},#{retailPrice},#{originPlace},#{unit})")
     public boolean addGood(Goods goods);
+
+    //更新商品库存
+    @Update("update goods set acount = acount+#{number} where goodNo=#{goodNo}")
+    public boolean updGoodAccount(@Param("number") int number,@Param("goodNo") String goodNo);
 }

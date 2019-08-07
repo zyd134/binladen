@@ -19,6 +19,7 @@
     <li class="select" status="2"><a href="#ios" data-toggle="tab">已通过</a></li>
     <li class="select" status="4"><a href="#notpay" data-toggle="tab">未付款</a></li>
     <li class="select" status="5"><a href="#payed" data-toggle="tab">已付款</a></li>
+    <li class="select" status="8"><a href="#buythenpay" data-toggle="tab">先采购再付款</a></li>
     <li class="select" status="7"><a href="#sto_in" data-toggle="tab">已采购未付款</a></li>
     <li class="select" status="6"><a href="#finish" data-toggle="tab">已完成</a></li>
 </ul>
@@ -206,6 +207,44 @@
     </div>
 
 
+    <div class="tab-pane fade" id="buythenpay">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>已完成订单</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>订单编号</th>
+                                <th>采购时间</th>
+                                <th>采购人</th>
+                                <th>说明</th>
+                                <th>采购总价</th>
+                                <th>订单状态</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+
 
     <div class="tab-pane fade" id="sto_in">
         <div class="row">
@@ -286,6 +325,12 @@
                                             "</td>"
                                     }
 
+                                    if(status==8){
+                                        tr+="<td>" +
+                                            "<button pNo="+data[i].procurementNo+" class=\"tobuybtn btn btn-primary btn-sm\">去采购</button>" +
+                                            "</td>"
+                                    }
+
                                     if(status==4 || status==7){
                                         tr+="<td>" +
                                             "<button  class=\"toldbuybtn btn btn-primary btn-sm\">催付款</button>" +
@@ -347,6 +392,11 @@
                                     if(statusflag==5){
                                         tr+="<td>" +
                                             "<button pNo="+data[i].procurementNo+" class=\"buybtn btn btn-primary btn-sm\">去采购</button>" +
+                                            "</td>"
+                                    }
+                                    if(statusflag==8){
+                                        tr+="<td>" +
+                                            "<button pNo="+data[i].procurementNo+" class=\"tobuybtn btn btn-primary btn-sm\">去采购</button>" +
                                             "</td>"
                                     }
                                     if(statusflag==4 || statusflag==7){
@@ -412,6 +462,35 @@
                 url:"pro/updPOrderStatusByNo",
                 type:"post",
                 data:{status:6,pNo:pNo},
+                datatype:"json",
+                success:function (data) {
+                    if(data.result=="success"){
+                        alert("采购完成！");
+                        obj.parents("tr").remove();
+                        var index = obj.parents("tr").attr("index");
+                        $("tr").each(function(){
+                            if($(this).attr("index")==index){
+                                $(this).remove();
+                            }
+                        })
+                    }else{
+                        alert("采购失败！");
+                    }
+                }
+            })
+        })
+
+
+
+        //先采购再付款
+        //去采购
+        $("tbody").on("click",".tobuybtn",function(){
+            var obj=$(this);
+            var pNo =obj.attr("pNo");
+            $.ajax({
+                url:"pro/updPOrderStatusByNo",
+                type:"post",
+                data:{status:7,pNo:pNo},
                 datatype:"json",
                 success:function (data) {
                     if(data.result=="success"){

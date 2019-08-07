@@ -12,7 +12,7 @@
 <form role="form" class="form-inline">
     <div class="form-group">
         <label for="returnNo">流水号</label>
-        <input type="text" class="form-control" id="returnNo" value="${saleReturnNo}" disabled="disabled">
+        <input type="text" class="form-control" id="returnNo" value="${purReturnNo}" disabled="disabled">
     </div>
     <div class="form-group">
         <label for="operator">申请人</label>
@@ -24,11 +24,11 @@
     </div>
 
     <div class="form-group">
-        <label for="customer">客户</label>
-        <select id="customer" class="form-control">
+        <label for="supplier">供应商</label>
+        <select id="supplier" class="form-control">
             <option >请选择</option>
-            <c:forEach var="customer" items="${customerList}">
-                <option value="${customer.customerNo}">${customer.customerName}</option>
+            <c:forEach var="sup" items="${supplierList}">
+                <option value="${sup.supplierNo}">${sup.supplierName}</option>
             </c:forEach>
         </select>
     </div>
@@ -42,9 +42,9 @@
         <th>商品类别</th>
         <th>规格型号</th>
         <th>计量单位</th>
-        <th>销售价格</th>
+        <th>采购价格</th>
         <th>数量</th>
-        <th>销售总数</th>
+        <th>采购总数</th>
         <th>小计(￥元)</th>
         <th>备注</th>
     </tr>
@@ -84,12 +84,12 @@
     //动态读取商品信息
     var goods;
     function getGoods(){
-        var customerNo = $("#customer").val();
+        var supplierNo = $("#supplier").val();
         $.ajax({
-            url:"sale/getGoodListByCustomerNo",
+            url:"pro/getGoodListBySupplierNo",
             contextType:"application/json",
             type:"post",
-            data:{customerNo:customerNo},
+            data:{supplierNo:supplierNo},
             dataType:"json",
             success:function(data) {
                 goods=data;
@@ -118,7 +118,7 @@
                 $(this).parent().parent().children("td").eq(2).text(goods[i].goodTypeName);
                 $(this).parent().parent().children("td").eq(3).text(goods[i].goodSpecs);
                 $(this).parent().parent().children("td").eq(4).text(goods[i].unit);
-                $(this).parent().parent().children("td").eq(5).text(goods[i].salePrice);
+                $(this).parent().parent().children("td").eq(5).text(goods[i].purchasePrice);
                 $(this).parent().parent().children("td").eq(7).text(goods[i].totalAmount);
 
             }
@@ -148,7 +148,7 @@
         var returnNo=$("#returnNo").val();//退货订单号
         var operator = $("#operator").attr("empNo");//操作人
         var handlePerson=$("#handlePerson").val();//经手人
-        var customer=$("#customer").val();//客户
+        var supplier=$("#supplier").val();//客户
         var goodsarr=new Array();//采购商品的集合
         var returnPrice=0;
         //获取所有的订单详情
@@ -161,11 +161,11 @@
             returnPrice+=parseInt(goods.totalPrice);
             goodsarr.push(goods);//将当前对象存放到数组中
         })
-        var jsonstr={"returnNo":returnNo,"operator":operator,"handlePerson":handlePerson,"customer":customer,"returnPrice":returnPrice,"goods":goodsarr}
+        var jsonstr={"returnNo":returnNo,"operator":operator,"handlePerson":handlePerson,"supplier":supplier,"returnPrice":returnPrice,"goods":goodsarr}
         /*alert(JSON.stringify(jsonstr))*/
 
         $.ajax({
-            url:"sale/addSaleReturnOrder",
+            url:"pro/addPurReturnOrder",
             type:"post",
             data:JSON.stringify(jsonstr),
             contentType:"application/json;charset=UTF-8",

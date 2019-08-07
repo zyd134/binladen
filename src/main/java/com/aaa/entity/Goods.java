@@ -26,7 +26,9 @@ public class Goods {
     //计量单位
     private String unit;
     //库存
-    private String acount;
+    private int acount;
+    //客户或者供应商 采购或销售的总量
+    private int totalAmount;
 
     public String getGoodNo() {
         return goodNo;
@@ -116,11 +118,19 @@ public class Goods {
         this.goodTypeName = goodTypeName;
     }
 
-    public String getAcount() {
+    public int getAcount() {
         return acount;
     }
 
-    public void setAcount(String acount) {
+    public void setAcount(int acount) {
         this.acount = acount;
+    }
+
+    public int getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(int totalAmount) {
+        this.totalAmount = totalAmount;
     }
 }
