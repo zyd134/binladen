@@ -69,7 +69,7 @@
                         "    <td>" + data[i].purchasePrice + "</td>\n" +
                         "    <td>" + data[i].valueName + "</td>\n";
                         tr+="<td><select name='status' class='form-control myoption' >";
-                            for (var j=0;j<dic.length;j++) {
+                            for (var j=0;j<3;j++) {
                                 if(dic[j].valueName==data[i].valueName){
                                     tr+="<option value="+dic[j].valueId+" selected='selected'>"+dic[j].valueName+"</option>";
                                 }else{
@@ -129,7 +129,7 @@
                     "    <td>" + emp[i].purchasePrice + "</td>\n" +
                     "    <td>" + emp[i].valueName + "</td>\n";
                     tr+="<td><select name='status' class='form-control myoption' >";
-                    for (var j=0;j<dic.length;j++) {
+                    for (var j=0;j<3;j++) {
                         if(dic[j].valueName==emp[i].valueName){
                             tr+="<option value="+dic[j].valueId+" selected='selected'>"+dic[j].valueName+"</option>";
                         }else{

@@ -3,7 +3,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <base>
 <base href="http://localhost:8080/binladen/">
-<title>采购</title>
+<title>销售</title>
 <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -11,32 +11,31 @@
 <body>
 <form role="form" class="form-inline">
     <div class="form-group">
-        <label for="purNo">流水号</label>
-        <input type="text" class="form-control" id="purNo" value="${purNo}" disabled="disabled">
+        <label for="saleNo">流水号</label>
+        <input type="text" class="form-control" id="saleNo" value="${saleNo}" disabled="disabled">
     </div>
     <div class="form-group">
         <label for="explain">说明</label>
         <input type="text" class="form-control" id="explain" >
     </div>
     <div class="form-group">
-        <label for="caigouperson">申请人</label>
-        <input type="text" class="form-control" id="caigouperson" value="${emp.name}" empNo="${emp.empNo}" readonly>
+        <label for="saleperson">申请人</label>
+        <input type="text" class="form-control" id="saleperson" value="${emp.name}" empNo="${emp.empNo}" readonly>
     </div>
     <div class="form-group">
-        <label for="caigoudept">申请部门</label>
-        <input type="text" class="form-control" id="caigoudept" >
+        <label for="saledept">申请部门</label>
+        <input type="text" class="form-control" id="saledept" >
     </div>
 
     <div class="form-group">
-        <label for="caigoudept">供应商</label>
-        <select id="supplier" class="form-control">
+        <label for="customer">客户</label>
+        <select id="customer" class="form-control">
             <option >请选择</option>
-            <c:forEach var="sup" items="${supplierList}">
-                <option value="${sup.supplierNo}">${sup.supplierName}</option>
+            <c:forEach var="customer" items="${customerList}">
+                <option value="${customer.customerNo}">${customer.customerName}</option>
             </c:forEach>
         </select>
     </div>
-
 </form>
 <button id="btn" class="btn btn-success btn-sm">添加商品</button><br><br>
 <table  class="table">
@@ -47,7 +46,7 @@
         <th>商品类别</th>
         <th>规格型号</th>
         <th>计量单位</th>
-        <th>进货价格</th>
+        <th>销售价格</th>
         <th>数量</th>
         <th>库存总数</th>
         <th>小计(￥元)</th>
@@ -120,7 +119,7 @@
                 $(this).parent().parent().children("td").eq(2).text(goods[i].typeName);
                 $(this).parent().parent().children("td").eq(3).text(goods[i].goodSpecs);
                 $(this).parent().parent().children("td").eq(4).text(goods[i].unit);
-                $(this).parent().parent().children("td").eq(5).text(goods[i].purchasePrice);
+                $(this).parent().parent().children("td").eq(5).text(goods[i].salePrice);
                 $(this).parent().parent().children("td").eq(7).text(goods[i].acount);
 
             }
@@ -147,13 +146,13 @@
 
     //点击提交按钮时
     $("#submit").click(function () {
-        var purNo=$("#purNo").val();
+        var saleNo=$("#saleNo").val();
         var explain = $("#explain").val();//说明
-        var applyperson=$("#caigouperson").attr("empNo");//采购人
-        var applydept=$("#caigoudept").val();//申请部门
+        var saleperson=$("#saleperson").attr("empNo");//采购人
+        var saledept=$("#saledept").val();//申请部门
         var goodsarr=new Array();//采购商品的集合
-        var purchasePrice=0;
-        var supplier=$("#supplier").val();//供应商
+        var salePrice=0;
+        var customer=$("#customer").val();
         //获取所有的订单详情
         $("#mytbd tr").each(function () {
             //每一行都是一个对象
@@ -161,14 +160,14 @@
             goods.goodNo=$(this).children("td").eq(0).text();
             goods.goodAmount=$(this).find("input").val();
             goods.totalPrice=$(this).children("td").eq(8).text();
-            purchasePrice+=parseInt(goods.totalPrice);
+            salePrice+=parseInt(goods.totalPrice);
             goodsarr.push(goods);//将当前对象存放到数组中
         })
-        var jsonstr={"purNo":purNo,"explain":explain,"applyperson":applyperson,"applydept":applydept,"purchasePrice":purchasePrice,"supplier":supplier,"goods":goodsarr}
-        alert(JSON.stringify(jsonstr))
+        var jsonstr={"saleNo":saleNo,"explain":explain,"applyperson":saleperson,"applydept":saledept,"salePrice":salePrice,"customer":customer,"goods":goodsarr}
+        /*alert(JSON.stringify(jsonstr))*/
 
         $.ajax({
-            url:"pur/purchaseGood",
+            url:"sale/addSaleOrder",
             type:"post",
             data:JSON.stringify(jsonstr),
             contentType:"application/json;charset=UTF-8",

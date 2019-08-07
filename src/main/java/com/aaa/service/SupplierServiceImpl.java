@@ -19,6 +19,11 @@ public class SupplierServiceImpl implements SupplierService{
         return supplierDao.getSupplierList(currentPage, pageSize);
     }
 
+    @Override
+    public List<Supplier> getAllSupplierList() {
+        return supplierDao.getAllSupplierList();
+    }
+
     //获得供应商总数
 
     @Override

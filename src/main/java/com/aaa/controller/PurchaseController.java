@@ -22,6 +22,10 @@ public class PurchaseController {
     @Resource
     private PurchaseService purchaseService;
 
+    @RequestMapping("/toPurOrderPay")
+    public String toPurOrderPay(){
+        return "houtai/purchaseOrderPay";
+    }
 
 
     //添加采购订单
@@ -30,11 +34,12 @@ public class PurchaseController {
     public void purchaseGood(@RequestBody JSONObject order){
         Procurement procurement = new Procurement();
         PurchaseDetail pd=new PurchaseDetail();
-        procurement.setProcurementNo("CGDD"+NumberUtil.createNum());
+        procurement.setProcurementNo(order.getString("purNo"));
         procurement.setPurchaseTime(new Date());
         procurement.setPurchaser(order.getString("applyperson"));
         procurement.setP_explain(order.getString("explain"));
         procurement.setPurchasePrice(order.getDouble("purchasePrice"));
+        procurement.setSupplier(order.getString("supplier"));
         JSONArray goodArr = order.getJSONArray("goods");
 
         if(purchaseService.addProcurement(procurement)){
@@ -60,15 +65,14 @@ public class PurchaseController {
 
     //查询采购订单
     @RequestMapping("/selectPurOrder")
-    public String selectPurOrder(int status,Model model){
-        model.addAttribute("procurementList",purchaseService.getProListByStatus(status));
+    public String selectPurOrder(){
         return "houtai/procurementOrderMgt";
     }
 
     @RequestMapping("/selectPurOrderByStatus")
     @ResponseBody
-    public List<Procurement> selectPurOrderByStatus(int status){
+    public List<Procurement> selectPurOrderByStatus(int status,String empNo){
         System.out.println("jjjjjjjjjjj");
-        return purchaseService.getProListByStatus(status);
+        return purchaseService.getProListByStatus(status,empNo);
     }
 }

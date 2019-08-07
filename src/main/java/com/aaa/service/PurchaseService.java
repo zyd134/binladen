@@ -10,7 +10,7 @@ public interface PurchaseService {
 
     public boolean addPurDetail(PurchaseDetail purchaseDetail);
 
-    public List<Procurement> getProListByStatus(int status);
+    public List<Procurement> getProListByStatus(int status,String empNo);
 
     public List<PurchaseDetail> getPurchaseListByPno(String pNo);
 }

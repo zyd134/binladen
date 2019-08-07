@@ -3,6 +3,7 @@ package com.aaa.entity;
 public class Customer {
     private int id;
     private String customerNo;
+    private String customerName;
     private String contacts;
     private String tel;
     private String address;
@@ -70,12 +71,21 @@ public class Customer {
         return bankAccount;
     }
 
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
     public void setBankAccount(String bankAccount) {
         this.bankAccount = bankAccount;
     }
-    public Customer(int id, String customerNo, String contacts, String tel, String address, String email, String bank, String bankAccount) {
+    public Customer(int id, String customerNo,String customerName, String contacts, String tel, String address, String email, String bank, String bankAccount) {
         this.id = id;
         this.customerNo = customerNo;
+        this.customerName= customerName;
         this.contacts = contacts;
         this.tel = tel;
         this.address = address;

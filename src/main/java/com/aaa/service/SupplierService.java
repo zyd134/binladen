@@ -8,6 +8,8 @@ public interface SupplierService {
 
     public List<Supplier> getSupplierList(int currentPage, int pageSize);
 
+    public List<Supplier> getAllSupplierList();
+
     public int getCountOfSupplier();
 
     public boolean deleteSupplierById(Integer id);

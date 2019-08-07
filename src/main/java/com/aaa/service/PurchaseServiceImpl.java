@@ -27,8 +27,8 @@ public class PurchaseServiceImpl implements PurchaseService{
 
     //查询采购订单
     @Override
-    public List<Procurement> getProListByStatus(int status) {
-        return purchaseDao.getProListByStatus(status);
+    public List<Procurement> getProListByStatus(int status,String empNo) {
+        return purchaseDao.getProListByStatus(status,empNo);
     }
 
     //通过订单编号查询订单明细

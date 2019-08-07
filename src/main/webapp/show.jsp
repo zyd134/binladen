@@ -22,7 +22,10 @@
             客户编码
         </th>
         <th>
-            姓名
+            客户名称
+        </th>
+        <th>
+            联系人
         </th>
         <th>
             电话
@@ -68,7 +71,8 @@
                 <form id="myform2" method="post">
                     <input name="id" class="id" id="id" style="display: none"/>
                     编码：<input class="customerNo" id="customerNo" name="customerNo" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    姓名：<input class="contacts" id="contacts" name="contacts"/><br><br>
+                    名称：<input class="customerName" id="name" name="customerName"/><br><br>
+                    联系人：<input class="contacts" id="contacts" name="contacts"/><br><br>
                     电话：<input class="tel" id="tel" name="tel" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     地址：<input class="address" id="address" name="address" /><br><br>
                     邮箱：<input class="email" id="email" name="email" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -102,7 +106,8 @@
             <div class="modal-body">
                 <form id="myform3" method="post">
                     编码：<input class="customerNo" id="customerNo" name="customerNo" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    姓名：<input class="contacts" id="contacts" name="contacts"/><br><br>
+                    名称：<input class="customerName" id="customerName" name="customerName" /><br><br>
+                    联系人：<input class="contacts" id="contacts" name="contacts"/><br><br>
                     电话：<input class="tel" id="tel" name="tel" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     地址：<input class="address" id="address" name="address" /><br><br>
                     邮箱：<input class="email" id="email" name="email" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -147,6 +152,7 @@
                     id=data[i].id;
                     var tr="<tr>\n" +
                         "<td>"+data[i].customerNo+"</td>\n" +
+                        "<td>"+data[i].customerName+"</td>\n" +
                         "<td>"+data[i].contacts+"</td>\n" +
                         "<td>"+data[i].tel+"</td>\n" +
                         "<td>"+data[i].address+"</td>\n" +
@@ -202,15 +208,15 @@
     //点击修改时需要将被点击行的数据填充到from中
     $("#mytbd").on("click",".update",function () {
         //节点
-        alert(id);
         $(".id").val(id);
         $(".customerNo").val($(this).parent().parent().parent().parent().parent().find("td").eq(0).html());
-        $(".contacts").val($(this).parent().parent().parent().parent().parent().find("td").eq(1).html());
-        $(".tel").val($(this).parent().parent().parent().parent().parent().find("td").eq(2).html());
-        $(".address").val($(this).parent().parent().parent().parent().parent().find("td").eq(3).html());
-        $(".email").val($(this).parent().parent().parent().parent().parent().find("td").eq(4).html());
-        $(".bank").val($(this).parent().parent().parent().parent().parent().find("td").eq(5).html());
-        $(".bankAccount").val($(this).parent().parent().parent().parent().parent().find("td").eq(6).html());
+        $(".customerName").val($(this).parent().parent().parent().parent().parent().find("td").eq(1).html());
+        $(".contacts").val($(this).parent().parent().parent().parent().parent().find("td").eq(2).html());
+        $(".tel").val($(this).parent().parent().parent().parent().parent().find("td").eq(3).html());
+        $(".address").val($(this).parent().parent().parent().parent().parent().find("td").eq(4).html());
+        $(".email").val($(this).parent().parent().parent().parent().parent().find("td").eq(5).html());
+        $(".bank").val($(this).parent().parent().parent().parent().parent().find("td").eq(6).html());
+        $(".bankAccount").val($(this).parent().parent().parent().parent().parent().find("td").eq(7).html());
 
         // $(".stuid").val($(this).parent().parent().children(0).html());
         // $(".sname").val($(this).parent().parent().find("td").eq(1).html());
