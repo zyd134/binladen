@@ -45,7 +45,7 @@
             </div>
             <div class="form-group">
                 <div class="layui-input-inline">
-                    <label class="layui-form-label">角色</label>
+                    <label class="layui-form-label">仓库</label>
                     <select name="role" lay-verify="required" lay-search="" id="storageNo"
                             style="height: 30px;width: 150px">
                     </select>

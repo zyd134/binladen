@@ -72,6 +72,11 @@ public class PermissionController {
         return "houtai/selectPro";
     }
 
+    @RequestMapping("toAllocation")
+    public String toAllocation(){
+        return "houtai/allocation";
+    }
+
     @RequestMapping("selectPermission")
     @ResponseBody
     public List<Map> selectPermission(HttpSession session){

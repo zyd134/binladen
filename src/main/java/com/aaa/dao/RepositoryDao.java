@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RepositoryDao {
     //为了生成一个入库单号
-    @Select("select count(*) from storage")
+    @Select("select count(*) from storage_in_detail")
     public int getdepotInCount();
 }

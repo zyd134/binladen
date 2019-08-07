@@ -51,4 +51,22 @@ public class StorageServiceImpl implements StorageService {
         }
         return true;
     }
+
+    @Override
+    public boolean updateAndInsert(String orderid, String goodNo, int size,String inNo,int goodAmount,String applyperson,String storageNo) {
+        boolean bln=false;
+        boolean bn=false;
+        boolean boln=false;
+        bn=storageDao.updateGoodsAmount(inNo,goodAmount-size);
+        if (bn){
+            bln=storageDao.InsertInNo(orderid,goodNo,size);
+        }
+        if (bln){
+            boln=storageDao.InsertStorageNo(orderid,applyperson,storageNo);
+        }
+        if(boln){
+            return true;
+        }
+        return false;
+    }
 }
