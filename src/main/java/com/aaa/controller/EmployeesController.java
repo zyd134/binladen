@@ -53,10 +53,9 @@ public class EmployeesController {
     @RequestMapping("updateEmpById")
     @ResponseBody
     public String updateEmpById(Employees employees){
-        System.out.println("++++++++++进入updateEmpById");
-        System.out.println(employees.getName()+"  "+employees.getSex());
+        /*System.out.println("++++++++++进入updateEmpById");
+        System.out.println(employees.getName()+"  "+employees.getSex());*/
         int a=employeesService.updateEmpById(employees);
-        System.out.println("-------------进入updateEmpById"+"***"+a);
         if (a > 0) {
             return "true";
         } else {

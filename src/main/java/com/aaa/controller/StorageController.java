@@ -34,7 +34,6 @@ public class StorageController {
     @RequestMapping("/insertSto")
     @ResponseBody//向客户端响应一个json数据
     public String insertSto(@RequestBody Map map) {//从客户端接收一个数据
-        System.out.println("进入+insertSto");
         boolean flag=storageService.insertSto(map);
         if(flag)
             return "true";
