@@ -13,8 +13,7 @@
     <script src="js/bootstrap.min.js"></script>
 </head>
 <body>
-<input name="role" id="myrole" class="role" type="text">
-<button id="btrole">提交</button>
+
 <table class="table table-striped">
     <thead>
     <tr>
@@ -69,12 +68,16 @@
                         "    <td>" + data[i].purchasePrice + "</td>\n" +
                         "    <td>" + data[i].valueName + "</td>\n";
                         tr+="<td><select name='status' class='form-control myoption' >";
+                        tr+="<option selected=\"selected\">--请选择--</option>";
                             for (var j=0;j<3;j++) {
-                                if(dic[j].valueName==data[i].valueName){
-                                    tr+="<option value="+dic[j].valueId+" selected='selected'>"+dic[j].valueName+"</option>";
-                                }else{
-                                    tr+="<option value="+dic[j].valueId+">"+dic[j].valueName+"</option>";
+                                if(dic[j].valueId!=1){
+                                    if(dic[j].valueName==data[i].valueName){
+                                        tr+="<option value="+dic[j].valueId+" selected='selected'>"+dic[j].valueName+"</option>";
+                                    }else{
+                                        tr+="<option value="+dic[j].valueId+">"+dic[j].valueName+"</option>";
+                                    }
                                 }
+
                             }
                         tr+="</select></td>"
                         tr+="</tr>";

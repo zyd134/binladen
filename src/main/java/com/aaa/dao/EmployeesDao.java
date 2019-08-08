@@ -30,4 +30,7 @@ public interface EmployeesDao {
     @Select("select * from employees where role=#{role}")
     public List<Map> selectEmpByRole(Integer role);
 
+    @Select("select count(*) from employees")
+    public int getEmpNo();
+
 }

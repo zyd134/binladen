@@ -43,7 +43,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">员工号</label>
                 <div class="layui-input-block">
-                    <input type="text" name="empNo" lay-verify="title" autocomplete="off" placeholder="请输入员工号" class="layui-input">
+                    <input type="text" id="empNo" name="empNo" lay-verify="title" autocomplete="off" placeholder="请输入员工号" class="layui-input" readonly>
                 </div>
             </div>
             <div class="layui-form-item">
@@ -58,14 +58,9 @@
                     <input type="password" name="password" lay-verify="title" autocomplete="off" placeholder="请输入密码" class="layui-input">
                 </div>
             </div>
+
             <div class="layui-form-item">
                 <label class="layui-form-label">性别</label>
-                <div class="layui-input-block">
-                    <input type="text" name="sex" lay-verify="title" autocomplete="off" placeholder="请输入性别" class="layui-input">
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">单选框</label>
                 <div class="layui-input-block">
                     <input type="radio" name="sex" value="1" title="男" checked="">
                     <input type="radio" name="sex" value="0" title="女">
@@ -188,82 +183,19 @@
                 }
             })
 
-            /*layui.use(['form', 'layedit', 'laydate'], function(){
-                var form = layui.form
-                    ,layer = layui.layer
-                    ,layedit = layui.layedit
-                    ,laydate = layui.laydate;
-
-                //自定义验证规则
-                form.verify({
-                    title: function(value){
-                        if(value.length < 5){
-                            return '标题也太短了吧';
-                        }
+            //在页面加载是时添加一个入库单好
+            $(function () {
+                $.ajax({
+                    url: "emp/getEmpNo",
+                    type: "post",
+                    dataType: "text",
+                    success: function (data) {
+                        $("#empNo").val(data)
                     }
-                    ,pass: [/(.+){6,12}$/, '密码必须6到12位']
-                    ,money: [
-                        /^\d+\.\b\d{2}\b$/
-                        ,'金额必须为小数保留两位'
-                    ]
-                });
 
-                //日期
-                laydate.render({
-                    elem: '#date'
-                });
+                })
+            })
 
-                //初始赋值
-                form.val('first', {
-                    'title': '测试'
-                    ,'phone': 11111111111
-                    ,'email': 'xu@sentsin.com'
-                    ,'password': 123123
-                    //,'quiz': 2
-                    ,'interest': 3
-                    ,'like[write]': true
-                    //,'open': false
-                    ,'sex': '男'
-                    ,'desc': 'form 是我们非常看重的一块'
-                    ,xxxxxxxxx: 123
-                });
-
-
-                //事件监听
-                form.on('select', function(data){
-                    console.log('select: ', this, data);
-                });
-
-                form.on('select(quiz)', function(data){
-                    console.log('select.quiz：', this, data);
-                });
-
-                form.on('select(interest)', function(data){
-                    console.log('select.interest: ', this, data);
-                });
-
-
-
-                form.on('checkbox', function(data){
-                    console.log(this.checked, data.elem.checked);
-                });
-
-                form.on('switch', function(data){
-                    console.log(data);
-                });
-
-                form.on('radio', function(data){
-                    console.log(data);
-                });
-
-                //监听提交
-                form.on('submit(*)', function(data){
-                    console.log(data)
-                    alert(JSON.stringify(data.field));
-                    return false;
-                });
-
-            });*/
 
         </script>
 

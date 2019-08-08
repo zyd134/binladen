@@ -2,12 +2,16 @@ package com.aaa.controller;
 
 import com.aaa.entity.Employees;
 import com.aaa.service.EmployeesService;
+import com.aaa.service.RepositoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -70,6 +74,24 @@ public class EmployeesController {
             System.out.println("+++"+m);
         }
         return list;
+    }
+
+    @Resource
+    private RepositoryService repositoryService;
+    @RequestMapping("/getEmpNo")
+    @ResponseBody
+    public String getEmpNo(){
+        String depotNo=null;
+        int count= employeesService.getEmpNo();
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd");
+        if(count<10){
+            depotNo="No"+sdf.format(new Date())+ "00"+(count+1);
+        }else if(count<100){
+            depotNo="No"+sdf.format(new Date())+ "0"+(count+1);
+        }else{
+            depotNo="No"+sdf.format(new Date())+(count+1);
+        }
+        return  depotNo;
     }
 
 
