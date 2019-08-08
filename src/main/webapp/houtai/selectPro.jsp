@@ -61,7 +61,7 @@
                     var tr = "<tr>\n" +
                         "    <td>" + data[i].procurementNo + "</td>\n" +
                         "    <td>" + data[i].purchaseTime + "</td>\n" +
-                        "    <td>" + data[i].purchaser + "</td>\n" +
+                        "    <td>" + data[i].purchaserName + "</td>\n" +
                         "    <td>" + data[i].applyDepartment + "</td>\n" +
                         "    <td>" + data[i].applicant + "</td>\n" +
                         "    <td>" + data[i].p_explain + "</td>\n" +
@@ -125,7 +125,7 @@
                 var tr = "<tr>\n" +
                     "    <td>" + emp[i].procurementNo + "</td>\n" +
                     "    <td>" + emp[i].purchaseTime + "</td>\n" +
-                    "    <td>" + emp[i].purchaser + "</td>\n" +
+                    "    <td>" + emp[i].purchaserName + "</td>\n" +
                     "    <td>" + emp[i].applyDepartment + "</td>\n" +
                     "    <td>" + emp[i].applicant + "</td>\n" +
                     "    <td>" + emp[i].p_explain + "</td>\n" +
