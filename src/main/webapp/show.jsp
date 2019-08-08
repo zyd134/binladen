@@ -48,10 +48,6 @@
     </tr>
     </thead>
     <tbody id="mytbd">
-    <ul class="dropdown-menu" role="menu">
-        <li><a href="#">修改</a></li>
-        <li><a href="#">删除</a></li>
-    </ul>
     </tbody>
 </table>
 
@@ -70,14 +66,14 @@
             <div class="modal-body">
                 <form id="myform2" method="post">
                     <input name="id" class="id" id="id" style="display: none"/>
-                    编码：<input class="customerNo" id="customerNo" name="customerNo" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    名称：<input class="customerName" id="name" name="customerName"/><br><br>
-                    联系人：<input class="contacts" id="contacts" name="contacts"/><br><br>
-                    电话：<input class="tel" id="tel" name="tel" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    地址：<input class="address" id="address" name="address" /><br><br>
-                    邮箱：<input class="email" id="email" name="email" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    银行：<input class="bank" id="bank" name="bank" /><br><br>
-                    卡号：<input class="bankAccount" id="bankAccount" name="bankAccount" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    编&nbsp;&nbsp;&nbsp;码：<input class="customerNo" id="customerNo" name="customerNo" readonly />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    名&nbsp;&nbsp;&nbsp;称：<input class="customerName" id="name" name="customerName"/><br><br>
+                    联系人：<input class="contacts" id="contacts" name="contacts"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    电&nbsp;&nbsp;&nbsp;话：<input class="tel" id="tel" name="tel" /><br><br>
+                    地&nbsp;&nbsp;&nbsp;址：<input class="address" id="address" name="address" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    邮&nbsp;&nbsp;&nbsp;箱：<input class="email" id="email" name="email" /><br><br>
+                    银&nbsp;&nbsp;&nbsp;行：<input class="bank" id="bank" name="bank" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    卡&nbsp;&nbsp;&nbsp;号：<input class="bankAccount" id="bankAccount" name="bankAccount" /><br><br>
                 </form>
             </div>
             <div class="modal-footer">
@@ -105,14 +101,13 @@
             </div>
             <div class="modal-body">
                 <form id="myform3" method="post">
-                    编码：<input class="customerNo" id="customerNo" name="customerNo" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    名称：<input class="customerName" id="customerName" name="customerName" /><br><br>
+                    名&nbsp;&nbsp;&nbsp;称：<input class="customerName" id="customerName" name="customerName" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     联系人：<input class="contacts" id="contacts" name="contacts"/><br><br>
-                    电话：<input class="tel" id="tel" name="tel" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    地址：<input class="address" id="address" name="address" /><br><br>
-                    邮箱：<input class="email" id="email" name="email" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    银行：<input class="bank" id="bank" name="bank" /><br><br>
-                    卡号：<input class="bankAccount" id="bankAccount" name="bankAccount" /><br><br>
+                    电&nbsp;&nbsp;&nbsp;话：<input class="tel" id="tel" name="tel" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    地&nbsp;&nbsp;&nbsp;址：<input class="address" id="address" name="address" /><br><br>
+                    邮&nbsp;&nbsp;&nbsp;箱：<input class="email" id="email" name="email" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    银&nbsp;&nbsp;&nbsp;行：<input class="bank" id="bank" name="bank" /><br><br>
+                    卡&nbsp;&nbsp;&nbsp;号：<input class="bankAccount" id="bankAccount" name="bankAccount" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <%--班级：<select class="update" id="claid" name="claid"></select>--%>
                 </form>
             </div>
