@@ -36,9 +36,9 @@
                     <tr style="background-color: #d4edda">
                         <th >${check.saleNo}</th>
                         <td><fmt:formatDate value="${check.saleTime}" pattern="yyyy-MM-dd"/></td>
-                        <td>${check.salePerson}</td>
+                        <td>${check.salePersonName}</td>
                         <td>${check.s_explain}</td>
-                        <td>${check.customer}</td>
+                        <td>${check.customerName}</td>
                         <td>${check.statusName}</td>
                         <td>
                             <div class="btn-group">
@@ -64,10 +64,12 @@
                         <td>总价</td>
                     </tr>
                         <c:forEach var="good" items="${check.saleDetailList}">
-                            <td>${good.goodNo}</td>
-                            <td>${good.goodName}</td>
-                            <td>${good.goodAmount}</td>
-                            <td>${good.totalPrice}</td>
+                            <tr>
+                                <td>${good.goodNo}</td>
+                                <td>${good.goodName}</td>
+                                <td>${good.goodAmount}</td>
+                                <td>${good.totalPrice}</td>
+                            </tr>
                         </c:forEach>
                     </c:forEach>
                 </table>

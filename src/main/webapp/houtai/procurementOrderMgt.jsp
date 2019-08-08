@@ -317,10 +317,10 @@
                             var tr="<tr index="+i+" style=\"background-color: #d4edda\">\n" +
                                 "                                <td>"+data[i].procurementNo+"</td>\n" +
                                 "                                <td>"+data[i].purchaseTime+"</td>\n"+
-                                "                                <td>"+data[i].purchaser+"</td>\n" +
+                                "                                <td>"+data[i].purchaserName+"</td>\n" +
                                 "                                <td>"+data[i].p_explain+"</td>\n" +
                                 "                                <td>"+data[i].purchasePrice+"</td>\n" +
-                                "                                <td>"+data[i].supplier+"</td>\n" +
+                                "                                <td>"+data[i].supplierName+"</td>\n" +
                                 "                                <td>"+data[i].statusName+"</td>\n" ;
                                     if(status==3){
                                         tr+="<td>" +
@@ -388,10 +388,10 @@
                         var tr="<tr index="+i+" style=\"background-color: #d4edda\">\n" +
                             "                                <td>"+data[i].procurementNo+"</td>\n" +
                             "                                <td>"+data[i].purchaseTime+"</td>\n"+
-                            "                                <td>"+data[i].purchaser+"</td>\n" +
+                            "                                <td>"+data[i].purchaserName+"</td>\n" +
                             "                                <td>"+data[i].p_explain+"</td>\n" +
                             "                                <td>"+data[i].purchasePrice+"</td>\n" +
-                            "                                <td>"+data[i].supplier+"</td>\n" +
+                            "                                <td>"+data[i].supplierName+"</td>\n" +
                             "                                <td>"+data[i].statusName+"</td>\n" ;
                                     if(statusflag==3){
                                         tr+="<td>" +

@@ -11,6 +11,7 @@ public class Procurement {
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date purchaseTime;
     private String purchaser;
+    private String purchaserName;
     private String applyDepartment;
     private String applicant;
     private String p_explain;
@@ -21,6 +22,8 @@ public class Procurement {
     private String statusName;
     //供应商编号
     private String supplier;
+    //供应商名
+    private String supplierName;
     //订单商品明细列表
     private List<PurchaseDetail> purchaseDetailList;
 
@@ -119,5 +122,21 @@ public class Procurement {
 
     public void setStatusName(String statusName) {
         this.statusName = statusName;
+    }
+
+    public String getPurchaserName() {
+        return purchaserName;
+    }
+
+    public void setPurchaserName(String purchaserName) {
+        this.purchaserName = purchaserName;
+    }
+
+    public String getSupplierName() {
+        return supplierName;
+    }
+
+    public void setSupplierName(String supplierName) {
+        this.supplierName = supplierName;
     }
 }

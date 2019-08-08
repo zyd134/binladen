@@ -14,6 +14,8 @@ public class Sale {
     private Date saleTime;
     //销售人
     private String salePerson;
+    //销售人名
+    private String salePersonName;
     //申请部门
     private String applyDepartment;
     //申请人
@@ -28,6 +30,8 @@ public class Sale {
     private String statusName;
     //客户编号
     private String customer;
+    //客户名
+    private String customerName;
     //订单明细集合
     private List<SaleDetail> saleDetailList;
 
@@ -125,5 +129,21 @@ public class Sale {
 
     public void setSaleDetailList(List<SaleDetail> saleDetailList) {
         this.saleDetailList = saleDetailList;
+    }
+
+    public String getSalePersonName() {
+        return salePersonName;
+    }
+
+    public void setSalePersonName(String salePersonName) {
+        this.salePersonName = salePersonName;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 }
