@@ -38,7 +38,7 @@ public interface ProcurementDao {
     public List<Goods> getGoodListBySupplierNo(String supplierNo);
 
     //添加采购退货订单
-    @Insert("insert into pur_return(returnNo,returnDay,operator,handlePerson,supplier,returnPrice)values(#{returnNo},#{returnDay},#{operator},#{handlePerson},#{supplier},#{returnPrice})")
+    @Insert("insert into pur_return(returnNo,returnDay,operator,supplier,returnPrice)values(#{returnNo},#{returnDay},#{operator},#{supplier},#{returnPrice})")
     public boolean addPurReturnOrder(PurchaseReturn pr);
 
     //添加采购退货订单明细

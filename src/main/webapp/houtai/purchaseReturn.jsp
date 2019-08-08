@@ -18,10 +18,6 @@
         <label for="operator">申请人</label>
         <input type="text" class="form-control" id="operator" value="${emp.name}" empNo="${emp.empNo}" readonly>
     </div>
-    <div class="form-group">
-        <label for="handlePerson">经手人</label>
-        <input type="text" class="form-control" id="handlePerson" >
-    </div>
 
     <div class="form-group">
         <label for="supplier">供应商</label>
@@ -147,7 +143,6 @@
     $("#submit").click(function () {
         var returnNo=$("#returnNo").val();//退货订单号
         var operator = $("#operator").attr("empNo");//操作人
-        var handlePerson=$("#handlePerson").val();//经手人
         var supplier=$("#supplier").val();//客户
         var goodsarr=new Array();//采购商品的集合
         var returnPrice=0;
@@ -161,7 +156,7 @@
             returnPrice+=parseInt(goods.totalPrice);
             goodsarr.push(goods);//将当前对象存放到数组中
         })
-        var jsonstr={"returnNo":returnNo,"operator":operator,"handlePerson":handlePerson,"supplier":supplier,"returnPrice":returnPrice,"goods":goodsarr}
+        var jsonstr={"returnNo":returnNo,"operator":operator,"supplier":supplier,"returnPrice":returnPrice,"goods":goodsarr}
         /*alert(JSON.stringify(jsonstr))*/
 
         $.ajax({

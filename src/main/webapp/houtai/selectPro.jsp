@@ -7,7 +7,7 @@
 <html>
 <head>
     <base href="http://localhost:8080/binladen/"></base>
-    <title>Title</title>
+    <title>申请审核</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -21,7 +21,6 @@
         <th>采购时间</th>
         <th>采购人</th>
         <th>申请部门</th>
-        <th>申请人</th>
         <th>说明</th>
         <th>采购总价</th>
         <th>订单状态</th>
@@ -63,7 +62,6 @@
                         "    <td>" + data[i].purchaseTime + "</td>\n" +
                         "    <td>" + data[i].purchaserName + "</td>\n" +
                         "    <td>" + data[i].applyDepartment + "</td>\n" +
-                        "    <td>" + data[i].applicant + "</td>\n" +
                         "    <td>" + data[i].p_explain + "</td>\n" +
                         "    <td>" + data[i].purchasePrice + "</td>\n" +
                         "    <td>" + data[i].valueName + "</td>\n";

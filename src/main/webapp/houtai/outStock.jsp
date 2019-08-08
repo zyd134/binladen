@@ -94,7 +94,7 @@
     $.ajax({
         url: "sale/selectSaleOrderByStatus",
         type: "post",
-        data: {status: 3, empNo: 123456},
+        data: {status: 3, empNo:${emp.empNo}},
         datatype: "json",
         success: function (data) {
             for (var i = 0; i < data.length; i++) {
@@ -169,6 +169,7 @@
             dataType: "json",
             data:{"outNo":orderid,"outGoodNo":goodNo,"goodAmount":goodAmount,"salePerson":salePerson,"num":num},
             success:function (data) {
+                alert("出库成功")
             }
         })
     })
