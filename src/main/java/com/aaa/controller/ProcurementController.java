@@ -56,7 +56,6 @@ public class ProcurementController {
     @RequestMapping("examineById")
     @ResponseBody
     public String examineById(Integer status,String procurementNo){
-        System.out.println("+++++++"+status);
         int a=procurementService.examineById(status,procurementNo);
         if(a>0){
             return "true";
