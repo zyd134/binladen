@@ -55,9 +55,9 @@
                 <form id="myform2" class="form-horizontal" role="form" method="post">
 
                     <div class="form-group">
-                        <label for="firstname" class="col-sm-2 control-label">id</label>
+
                         <div class="col-sm-10">
-                            <input type="text" class="form-control id" id="id" name="id" placeholder="请输入id">
+                            <input type="hidden" class="form-control id" id="id" name="id" placeholder="请输入id"s>
                         </div>
                     </div>
                     <div class="form-group">
