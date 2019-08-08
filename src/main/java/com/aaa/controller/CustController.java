@@ -2,6 +2,7 @@ package com.aaa.controller;
 
 import com.aaa.entity.Customer;
 import com.aaa.service.CustomerService;
+import com.aaa.utils.NumberUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,6 +25,7 @@ public class CustController {
     @RequestMapping("/addCust")
     @ResponseBody
     public String addCust(Customer customer){
+        customer.setCustomerNo("KH"+NumberUtil.createNum());
         customerService.addCust(customer);
         return "添加成功";
     }
