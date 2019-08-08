@@ -42,6 +42,7 @@
                                     <th>采购人</th>
                                     <th>说明</th>
                                     <th>采购总价</th>
+                                    <th>供应商</th>
                                     <th>订单状态</th>
                                     <th>操作</th>
                                 </tr>
@@ -78,6 +79,7 @@
                                 <th>采购人</th>
                                 <th>说明</th>
                                 <th>采购总价</th>
+                                <th>供应商</th>
                                 <th>订单状态</th>
                             </tr>
                             </thead>
@@ -113,6 +115,7 @@
                                 <th>采购人</th>
                                 <th>说明</th>
                                 <th>采购总价</th>
+                                <th>供应商</th>
                                 <th>订单状态</th>
                                 <th>操作</th>
                             </tr>
@@ -149,6 +152,7 @@
                                 <th>采购人</th>
                                 <th>说明</th>
                                 <th>采购总价</th>
+                                <th>供应商</th>
                                 <th>订单状态</th>
                                 <th>操作</th>
                             </tr>
@@ -188,6 +192,7 @@
                                 <th>采购人</th>
                                 <th>说明</th>
                                 <th>采购总价</th>
+                                <th>供应商</th>
                                 <th>订单状态</th>
                             </tr>
                             </thead>
@@ -225,6 +230,7 @@
                                 <th>采购人</th>
                                 <th>说明</th>
                                 <th>采购总价</th>
+                                <th>供应商</th>
                                 <th>订单状态</th>
                                 <th>操作</th>
                             </tr>
@@ -264,6 +270,7 @@
                                 <th>采购人</th>
                                 <th>说明</th>
                                 <th>采购总价</th>
+                                <th>供应商</th>
                                 <th>订单状态</th>
                                 <th>操作</th>
                             </tr>
@@ -313,6 +320,7 @@
                                 "                                <td>"+data[i].purchaser+"</td>\n" +
                                 "                                <td>"+data[i].p_explain+"</td>\n" +
                                 "                                <td>"+data[i].purchasePrice+"</td>\n" +
+                                "                                <td>"+data[i].supplier+"</td>\n" +
                                 "                                <td>"+data[i].statusName+"</td>\n" ;
                                     if(status==3){
                                         tr+="<td>" +
@@ -383,6 +391,7 @@
                             "                                <td>"+data[i].purchaser+"</td>\n" +
                             "                                <td>"+data[i].p_explain+"</td>\n" +
                             "                                <td>"+data[i].purchasePrice+"</td>\n" +
+                            "                                <td>"+data[i].supplier+"</td>\n" +
                             "                                <td>"+data[i].statusName+"</td>\n" ;
                                     if(statusflag==3){
                                         tr+="<td>" +

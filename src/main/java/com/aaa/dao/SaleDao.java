@@ -67,4 +67,28 @@ public interface SaleDao {
     //添加销售退货订单明细
     @Insert("insert into sale_return_detail(saleReturnNo,goodNo,goodAmount) values(#{saleReturnNo},#{goodNo},#{goodAmount})")
     public boolean addSaleReturnOrderDetail(SaleReturnDetail saleReturnDetail);
+
+
+    /**
+     * 审核方法
+     * @return
+     */
+
+    //查询采购订单
+    @Select(
+            "select * from sale where status = 1 LIMIT #{currentPage},#{pageSize}"
+    )
+    @Results({
+            @Result(property = "saleNo",column = "saleNo"),
+            @Result(property = "statusName",column = "status",
+                    one = @One(select = "com.aaa.dao.SaleDao.getStatusNameByStatus")),
+            @Result(property = "saleDetailList", column = "saleNo",
+                    many = @Many(select = "com.aaa.dao.SaleDao.getSaleDetailListBySaleNo"))
+    })
+    public List<Sale> getNotPassSaleList(@Param("currentPage") int currentPage, @Param("pageSize") int pageSize);
+
+
+    //获得未通过订单总数
+    @Select("select count(*) from sale where status=1")
+    public int getCountOfNotPassSale();
 }

@@ -165,4 +165,20 @@ public class SaleController {
 
     }
 
+
+    /**
+     * 销售审核
+     */
+    @RequestMapping("/toSaleCheck")
+    public String toSaleCheck(int currentPage,Model model){
+        int count= saleService.getCountOfNotPassSale();
+        int pageSize = 5;
+        int totalPage= count%pageSize==0?count/pageSize:count/pageSize+1;
+        model.addAttribute("count",count);
+        model.addAttribute("totalPage",totalPage);
+        model.addAttribute("currentPage",currentPage);
+        model.addAttribute("checkList",saleService.getNotPassSaleList(pageSize*(currentPage-1),pageSize));
+        return "houtai/saleCheck";
+    }
+
 }
