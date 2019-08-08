@@ -174,7 +174,7 @@
             contentType:"application/json;charset=UTF-8",
             accept:"/",
             success:function () {
-                console.log("success")
+
                 alert("订单生成成功")
             }
         });

@@ -121,7 +121,7 @@
             for (var i in data) {
                 var tr = "<tr>"
                 tr += "<td>" + data[i].procurementNo + "</td>"
-                tr += "<td>" + data[i].purchaser + "</td>"
+                tr += "<td>" + data[i].purchaserName + "</td>"
                 tr += "<td>" + data[i].purchaseTime + "</td>"
                 tr += "<td><button class='btn btn-sm getDetaiOrder' data-toggle='modal' data-target='#myModal' >查看订单详情</button></td>"
                 tr += "</tr>";
