@@ -73,7 +73,7 @@
                     "<td></td>\n" +
                     "<td></td>\n" +
                     "</tr>\n"
-                    acounts+=data[i].acount;
+                    acounts+=data[i].goodAmount;
                     //新增的tr追加到
                     $("#mytbd").append(tr);
                 }

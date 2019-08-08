@@ -101,7 +101,6 @@ public class ProcurementController {
         pr.setReturnNo(order.getString("returnNo"));
         pr.setOperator(order.getString("operator"));
         pr.setSupplier(order.getString("supplier"));
-        pr.setHandlePerson(order.getString("handlePerson"));
         pr.setReturnDay(new Date());
         pr.setReturnPrice(order.getDouble("returnPrice"));
         JSONArray goodArr = order.getJSONArray("goods");

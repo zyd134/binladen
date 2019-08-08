@@ -225,7 +225,7 @@
         num = $(this).parent().prev().find("input").val()
         if (goodAmount < num) {
             isFlag = false;
-            alert("调拨超出");
+            // alert("调拨超出");
         }
         if (isFlag) {
             $("#mytbd3").append(tr);
