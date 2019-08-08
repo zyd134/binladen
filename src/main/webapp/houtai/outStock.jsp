@@ -4,7 +4,7 @@
 <html>
 <base href="http://localhost:8080/binladen/"></base>
 <head>
-    <title>Title</title>
+    <title>销售出库</title>
     <base href="http://localhost:8080/binladen/"></base>
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -118,12 +118,14 @@
     var goodNo;
     var goodName;
     var goodAmount;
+    var num;
     $("#saletb").on("click", ".getDetaiOrder", function () {
         saleNo=$(this).parent().parent().children("td").eq(0).text();
         salePerson=$(this).parent().parent().children("td").eq(2).text();
         goodNo=$(this).parent().parent().children("td").eq(3).text();
         goodName=$(this).parent().parent().children("td").eq(4).text();
         goodAmount=$(this).parent().parent().children("td").eq(5).text();
+
         var tr = "<tr>"
         tr += "<td>" + saleNo + "</td>"
         tr += "<td>" + goodName + "</td>"
@@ -134,7 +136,7 @@
         $("#mytbd2").append(tr);
     })
     $("#mytbd2").on("click", ".btnAdd", function () {
-        var num=$("#mytbd2").children().children().children().val();
+        num=$("#mytbd2").children().children().children().val();
         var tr = "<tr>"
         tr += "<td>" + saleNo + "</td>"
         tr += "<td>" + goodName + "</td>"
@@ -158,14 +160,12 @@
     })
 
     $("#submit3").click(function () {
-        alert(12)
         var orderid = $("#orderid").val();
-        alert(orderid)
         $.ajax({
             url: "out/insertOutDe",
             type: "post",
             dataType: "json",
-            data:{"outNo":orderid,"outGoodNo":goodNo,"goodAmount":goodAmount,"salePerson":salePerson},
+            data:{"outNo":orderid,"outGoodNo":goodNo,"goodAmount":goodAmount,"salePerson":salePerson,"num":num},
             success:function (data) {
                 alert(656565)
             }

@@ -206,7 +206,7 @@
     $("#submit3").click(function () {
         var storageNo = $("#storageNo").val();
         var inGoodNo=$("#mytbd3").children().children("td").eq(0).text();
-        alert("1213"+inGoodNo)
+        var num=$("#mytbd3").children().children("td").eq(5).text();
         var inNo = $("#orderid").val();
         var applyperson = $("#caigouperson").val();//入库人
         var goodsarr = new Array();
@@ -224,6 +224,7 @@
         var jsonstr = {
             "inGoodNo":inGoodNo,
             "inNo": inNo,
+            "num":num,
             "storageNo": storageNo,
             "applyperson": applyperson,
             "goods": goodsarr
