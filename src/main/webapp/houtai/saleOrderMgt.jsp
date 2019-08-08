@@ -39,6 +39,7 @@
                                 <th>销售人</th>
                                 <th>说明</th>
                                 <th>销售总价</th>
+                                <th>客户</th>
                                 <th>订单状态</th>
                                 <th>操作</th>
                             </tr>
@@ -75,6 +76,7 @@
                                 <th>销售人</th>
                                 <th>说明</th>
                                 <th>销售总价</th>
+                                <th>客户</th>
                                 <th>订单状态</th>
                             </tr>
                             </thead>
@@ -110,6 +112,7 @@
                                 <th>销售人</th>
                                 <th>说明</th>
                                 <th>销售总价</th>
+                                <th>客户</th>
                                 <th>订单状态</th>
                             </tr>
                             </thead>
@@ -145,6 +148,7 @@
                                 <th>销售人</th>
                                 <th>说明</th>
                                 <th>销售总价</th>
+                                <th>客户</th>
                                 <th>订单状态</th>
                             </tr>
                             </thead>
@@ -200,6 +204,7 @@
                             "                                <td>"+data[i].salePerson+"</td>\n" +
                             "                                <td>"+data[i].s_explain+"</td>\n" +
                             "                                <td>"+data[i].salePrice+"</td>\n" +
+                            "                                <td>"+data[i].customer+"</td>\n" +
                             "                                <td>"+data[i].statusName+"</td>\n" ;
                         if(statusflag==2){
                             tr+="<td>" +
@@ -248,6 +253,7 @@
                                 "                                <td>"+data[i].salePerson+"</td>\n" +
                                 "                                <td>"+data[i].s_explain+"</td>\n" +
                                 "                                <td>"+data[i].salePrice+"</td>\n" +
+                                "                                <td>"+data[i].customer+"</td>\n" +
                                 "                                <td>"+data[i].statusName+"</td>\n" ;
                                     if(status==2){
                                         tr+="<td>" +

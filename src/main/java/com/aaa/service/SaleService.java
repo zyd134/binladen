@@ -31,4 +31,9 @@ public interface SaleService {
 
     //添加销售退货订单明细
     public boolean addSaleReturnOrderDetail(SaleReturnDetail saleReturnDetail);
+
+    public int getCountOfNotPassSale();
+
+    //查询采购订单
+    public List<Sale> getNotPassSaleList(int currentPage,int pageSize);
 }

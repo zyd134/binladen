@@ -71,4 +71,14 @@ public class SaleServiceImpl implements SaleService {
     public boolean addSaleReturnOrderDetail(SaleReturnDetail saleReturnDetail){
         return saleDao.addSaleReturnOrderDetail(saleReturnDetail);
     };
+
+    @Override
+    public int getCountOfNotPassSale() {
+        return saleDao.getCountOfNotPassSale();
+    }
+
+    @Override
+    public List<Sale> getNotPassSaleList(int currentPage, int pageSize) {
+        return saleDao.getNotPassSaleList(currentPage,pageSize);
+    }
 }
