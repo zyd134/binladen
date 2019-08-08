@@ -204,8 +204,9 @@
 
     //点击提交按钮时把采购单加入数据库
     $("#submit3").click(function () {
-        alert(222)
         var storageNo = $("#storageNo").val();
+        var inGoodNo=$("#mytbd3").children().children("td").eq(0).text();
+        alert("1213"+inGoodNo)
         var inNo = $("#orderid").val();
         var applyperson = $("#caigouperson").val();//入库人
         var goodsarr = new Array();
@@ -221,12 +222,12 @@
         })
 
         var jsonstr = {
+            "inGoodNo":inGoodNo,
             "inNo": inNo,
             "storageNo": storageNo,
             "applyperson": applyperson,
             "goods": goodsarr
         }
-        alert(11)
         $.ajax({
             url: "sto/insertSto",
             type: "post",

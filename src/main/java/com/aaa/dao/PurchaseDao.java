@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface PurchaseDao {
     //添加采购订单
-    @Insert("insert into procurement(procurementNo,purchaseTime,purchaser,p_explain,purchasePrice,supplier)values(#{procurementNo},#{purchaseTime},#{purchaser},#{p_explain},#{purchasePrice},#{supplier})")
+    @Insert("insert into procurement(procurementNo,purchaseTime,purchaser,p_explain,applyDepartment,purchasePrice,supplier)values(#{procurementNo},#{purchaseTime},#{purchaser},#{p_explain},#{applyDepartment},#{purchasePrice},#{supplier})")
     public boolean addProcurement(Procurement procurement);
 
     //添加采购订单明细
