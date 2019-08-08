@@ -15,12 +15,13 @@ public class StorageOutServiceImpl implements StorageOutService {
     }
 
     @Override
-    public int insertOutDe(String outNo, String goodNo, int goodAmount,String salePerson) {
+    public int insertOutDe(String outNo, String goodNo, int goodAmount,String salePerson,int num) {
         int b=0;
         int c=0;
         int a=storageOutDao.insertOutDe(outNo,goodNo,goodAmount);
         if (a>0){
             c=storageOutDao.insertOut(outNo,salePerson);
+            storageOutDao.updateGoodsNum(goodNo,num);
         }
         if (c>0){
             b=1;

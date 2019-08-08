@@ -40,6 +40,8 @@ public class StorageServiceImpl implements StorageService {
 
         //入库总表
         int num= storageDao.insertSto(map);
+
+        storageDao.updateGoods(map);
         //添加详情表
         List<Map> list= (List<Map>)map.get("goods");
 

@@ -34,8 +34,8 @@ public class StorageOutController {
 
     @RequestMapping("/insertOutDe")
     @ResponseBody
-    public String insertOutDe(String outNo,String outGoodNo,int goodAmount,String salePerson){
-        int a=storageOutService.insertOutDe(outNo,outGoodNo,goodAmount,salePerson);
+    public String insertOutDe(String outNo,String outGoodNo,int goodAmount,String salePerson,int num){
+        int a=storageOutService.insertOutDe(outNo,outGoodNo,goodAmount,salePerson,num);
         if(a>0){
             return "true";
         }else {

@@ -48,4 +48,6 @@ public interface StorageDao {
 
     @Insert("insert into storage_in(inNo,inTime,inPerson,storageNo) values(#{orderid},now(),#{applyperson},#{storageNo})")
     public boolean InsertStorageNo(@Param("orderid")String orderid,@Param("applyperson")String applyperson,@Param("storageNo")String storageNo);
+
+    public void updateGoods(Map map);
 }
