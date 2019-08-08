@@ -40,4 +40,9 @@ public class EmployeesServiceImpl implements EmployeesService {
         return employeesDao.selectEmpByRole(role);
     }
 
+    @Override
+    public int getEmpNo() {
+        return employeesDao.getEmpNo();
+    }
+
 }

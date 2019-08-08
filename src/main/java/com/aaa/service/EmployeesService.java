@@ -17,4 +17,6 @@ public interface EmployeesService {
 
     public List<Map> selectEmpByRole(Integer role);
 
+    public int getEmpNo();
+
 }

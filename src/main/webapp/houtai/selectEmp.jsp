@@ -15,8 +15,8 @@
     <script src="js/bootstrap.min.js"></script>
 </head>
 <body>
-<input name="role" id="myrole" class="role" type="text">
-<button id="btrole">提交</button>
+<input name="role" id="myrole" class="role" type="text" placeholder="请输入角色名">
+<button id="btrole">搜索</button>
 <table class="table table-striped">
     <thead>
     <tr>
