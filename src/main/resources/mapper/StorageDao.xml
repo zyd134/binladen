@@ -13,7 +13,7 @@
     <insert id="insertStoDetail" parameterType="java.util.List">
           insert into storage_in_detail(inNo,inGoodNo,goodAmount) values
          <foreach collection="list" item="item" separator=",">
-             (#{item.productNo},#{item.storageNo},#{item.goodsNum})
+             (#{item.productNo},#{item.orderid},#{item.goodsNum})
          </foreach>
     </insert>
 

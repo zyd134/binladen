@@ -11,7 +11,7 @@ public class Procurement {
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date purchaseTime;
     private String purchaser;
-    private int applyDepartment;
+    private String applyDepartment;
     private String applicant;
     private String p_explain;
     private double purchasePrice;
@@ -56,11 +56,11 @@ public class Procurement {
         this.purchaser = purchaser;
     }
 
-    public int getApplyDepartment() {
+    public String getApplyDepartment() {
         return applyDepartment;
     }
 
-    public void setApplyDepartment(int applyDepartment) {
+    public void setApplyDepartment(String applyDepartment) {
         this.applyDepartment = applyDepartment;
     }
 

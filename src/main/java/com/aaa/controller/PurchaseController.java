@@ -37,6 +37,7 @@ public class PurchaseController {
         procurement.setProcurementNo(order.getString("purNo"));
         procurement.setPurchaseTime(new Date());
         procurement.setPurchaser(order.getString("applyperson"));
+        procurement.setApplyDepartment(order.getString("applydept"));
         procurement.setP_explain(order.getString("explain"));
         procurement.setPurchasePrice(order.getDouble("purchasePrice"));
         procurement.setSupplier(order.getString("supplier"));

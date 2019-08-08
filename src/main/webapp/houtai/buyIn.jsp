@@ -165,7 +165,7 @@
             goodsarr.push(goods);//将当前对象存放到数组中
         })
         var jsonstr={"purNo":purNo,"explain":explain,"applyperson":applyperson,"applydept":applydept,"purchasePrice":purchasePrice,"supplier":supplier,"goods":goodsarr}
-        alert(JSON.stringify(jsonstr))
+        /*alert(JSON.stringify(jsonstr))*/
 
         $.ajax({
             url:"pur/purchaseGood",

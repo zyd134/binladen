@@ -54,7 +54,6 @@
 
     $(".form-inline").on('change',".selectSto",function(){
         var storageNo = $(this).val();
-        alert(storageNo);
         document.getElementById("mytbd").innerHTML = "";
         acounts=0;
         $.ajax({
@@ -78,12 +77,9 @@
                     //新增的tr追加到
                     $("#mytbd").append(tr);
                 }
-                alert("acounts is "+acounts);
                 $("#goodAmount").val(acounts);
             }
         })
-
-
         // getGoods();
     });
 
