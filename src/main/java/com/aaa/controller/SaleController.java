@@ -137,7 +137,6 @@ public class SaleController {
         sr.setReturnNo(order.getString("returnNo"));
         sr.setOperator(order.getString("operator"));
         sr.setCustomer(order.getString("customer"));
-        sr.setHandlePerson(order.getString("handlePerson"));
         sr.setReturnDay(new Date());
         sr.setReturnPrice(order.getDouble("returnPrice"));
         JSONArray goodArr = order.getJSONArray("goods");
