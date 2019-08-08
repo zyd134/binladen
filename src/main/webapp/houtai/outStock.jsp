@@ -130,12 +130,13 @@
         tr += "<td>" + saleNo + "</td>"
         tr += "<td>" + goodName + "</td>"
         tr += "<td>" + goodAmount + "</td>"
-        tr += "<td><input size='3'/></td>"
+        tr += "<td><input size='3' id='qqq'/></td>"
         tr += "<td><button class='btn btn-xs btnAdd'>确认</button></td>";
         tr += "</tr>";
         $("#mytbd2").append(tr);
     })
     $("#mytbd2").on("click", ".btnAdd", function () {
+
         num=$("#mytbd2").children().children().children().val();
         var tr = "<tr>"
         tr += "<td>" + saleNo + "</td>"
@@ -160,6 +161,7 @@
     })
 
     $("#submit3").click(function () {
+
         var orderid = $("#orderid").val();
         $.ajax({
             url: "out/insertOutDe",
@@ -167,9 +169,9 @@
             dataType: "json",
             data:{"outNo":orderid,"outGoodNo":goodNo,"goodAmount":goodAmount,"salePerson":salePerson,"num":num},
             success:function (data) {
-                alert(656565)
             }
         })
-        alert(123)
     })
+
+
 </script>

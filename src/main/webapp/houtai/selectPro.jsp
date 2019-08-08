@@ -92,7 +92,6 @@
         var valueName=$(this).parent().parent().children("td").eq(7).text();
         var valueName2 = $(this).children("option:selected").text();
         var status = $(this).val();
-        alert(status);
         if(valueName==valueName2){
             alert("操作一样，请重新选择·");
             return;
@@ -115,7 +114,7 @@
     btrole.onclick = function () {
         var a = $("#myrole").val();
         var b = 1;
-        alert(a)
+
         for (var i = 0; i < emp.length; i++) {
             if (emp[i].valueName == a) {
                 if (b == 1) {

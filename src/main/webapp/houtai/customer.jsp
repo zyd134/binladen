@@ -206,7 +206,7 @@
     //点击修改时需要将被点击行的数据填充到from中
     $("#mytbd").on("click",".update",function () {
         //节点
-        alert($(this).parent().parent().parent().parent().parent().children(0).html());
+        /*alert($(this).parent().parent().parent().parent().parent().children(0).html());*/
         $(".stuid").val($(this).parent().parent().parent().parent().parent().find("td").eq(0).html());
         $(".sname").val($(this).parent().parent().parent().parent().parent().find("td").eq(1).html());
         // $(".stuid").val($(this).parent().parent().children(0).html());

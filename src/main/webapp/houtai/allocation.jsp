@@ -125,7 +125,7 @@
                         "<td>" + data[i].goodName + "</td>\n" +
                         "<td>" + data[i].unit + "</td>\n" +
                         "<td>" + data[i].purchasePrice + "</td>\n" +
-                        "<td>" + data[i].goodAmount + "</td>\n" ;
+                        "<td>" + data[i].goodAmount + "</td>\n";
                     tr += "<td><button class='btn btn-sm getDetaiOrder' data-toggle='modal' data-target='#myModal' >调拨</button></td>";
                     tr += "</tr>\n";
                     acounts += data[i].acount;
@@ -194,11 +194,13 @@
     var goodName;
     var goodAmount;
     var inNo;
+    var num;
+    var isFlag;
 
     $("#mytbd").on("click", ".getDetaiOrder", function () {
         document.getElementById("mytbd2").innerHTML = "";
         goodNo = $(this).parent().parent().children("td").eq(0).text();
-        inNo=$(this).parent().parent().children("td").eq(1).text();
+        inNo = $(this).parent().parent().children("td").eq(1).text();
         goodName = $(this).parent().parent().children("td").eq(2).text();
         goodAmount = $(this).parent().parent().children("td").eq(5).text();
         var tr = "<tr>"
@@ -211,16 +213,26 @@
         $("#mytbd2").append(tr);
     })
 
+
     //点击确认按钮将商品信息添加到入库单中
     $("#mytbd2").on("click", ".btnAdd", function () {
+        isFlag=true;
         var tr = "<tr>"
         tr += "<td>" + goodNo + "</td>"
         tr += "<td>" + goodName + "</td>"
         tr += "<td>" + $(this).parent().prev().find("input").val() + "</td>";
         tr += "</tr>";
-        $("#mytbd3").append(tr);
-        $(this).prop("disabled", true);
+        num = $(this).parent().prev().find("input").val()
+        if (goodAmount < num) {
+            isFlag = false;
+            alert("调拨超出");
+        }
+        if (isFlag) {
+            $("#mytbd3").append(tr);
+            $(this).prop("disabled", true);
+        }
     })
+
 
     //在页面加载是时添加一个入库单好
     $(function () {
@@ -234,6 +246,7 @@
 
         })
     })
+
     $.ajax({
         url: "sto/selectNo",
         type: "post",
@@ -248,18 +261,26 @@
     })
 
     $("#submit3").click(function () {
-        var orderid=$("#orderid").val();
+        var orderid = $("#orderid").val();
         var size = $("#size").children().children().children("td").eq(2).text();
         var applyperson = $("#caigouperson").val();
-        var storageNo=$("#storageNo").val();
+        var storageNo = $("#storageNo").val();
         $.ajax({
             //调拨
             url: "sto/updateAndInsert",
             type: "post",
             dataType: "json",
-            data: {"orderid": orderid, "size": size, "goodNo": goodNo,"inNo":inNo,"goodAmount":goodAmount,"applyperson":applyperson,"storageNo":storageNo},
+            data: {
+                "orderid": orderid,
+                "size": size,
+                "goodNo": goodNo,
+                "inNo": inNo,
+                "goodAmount": goodAmount,
+                "applyperson": applyperson,
+                "storageNo": storageNo
+            },
             success: function (date) {
-                alert(555)
+                alert("调拨成功")
             }
         })
     })
