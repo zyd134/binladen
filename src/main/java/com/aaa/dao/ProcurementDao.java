@@ -12,7 +12,7 @@ import java.util.Map;
 @Repository
 @Mapper
 public interface ProcurementDao {
-    @Select("select * from procurement p JOIN pro_dictionary d on p.status=d.valueId where p.status=1")
+    @Select("select *,e.name as purchaserName from procurement p JOIN pro_dictionary d on p.status=d.valueId join employees e on p.purchaser = e.empNo where p.status=1")
     public List<Map> selectPro();
 
     @Select("select * from pro_dictionary")
