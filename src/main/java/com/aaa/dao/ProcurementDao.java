@@ -12,10 +12,10 @@ import java.util.Map;
 @Repository
 @Mapper
 public interface ProcurementDao {
-    @Select("select * from procurement p JOIN dictionary d on p.status=d.valueId")
+    @Select("select * from procurement p JOIN pro_dictionary d on p.status=d.valueId")
     public List<Map> selectPro();
 
-    @Select("select * from dictionary")
+    @Select("select * from pro_dictionary")
     public List<Map> selectDic();
 
     @Update("update procurement set status=#{status} where procurementNo=#{procurementNo}")
