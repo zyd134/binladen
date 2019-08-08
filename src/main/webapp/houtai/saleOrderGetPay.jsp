@@ -194,7 +194,7 @@
                         var tr="<tr index="+i+" style=\"background-color: #d4edda\">\n" +
                             "                                <td>"+data[i].saleNo+"</td>\n" +
                             "                                <td>"+data[i].saleTime+"</td>\n"+
-                            "                                <td>"+data[i].salePerson+"</td>\n" +
+                            "                                <td>"+data[i].salePersonName+"</td>\n" +
                             "                                <td>"+data[i].s_explain+"</td>\n" +
                             "                                <td>"+data[i].salePrice+"</td>\n" +
                             "                                <td>"+data[i].statusName+"</td>\n" ;
@@ -259,7 +259,7 @@
                             var tr="<tr index="+i+" style=\"background-color: #d4edda\">\n" +
                                 "                                <td>"+data[i].saleNo+"</td>\n" +
                                 "                                <td>"+data[i].saleTime+"</td>\n"+
-                                "                                <td>"+data[i].salePerson+"</td>\n" +
+                                "                                <td>"+data[i].salePersonName+"</td>\n" +
                                 "                                <td>"+data[i].s_explain+"</td>\n" +
                                 "                                <td>"+data[i].salePrice+"</td>\n" +
                                 "                                <td>"+data[i].statusName+"</td>\n" ;

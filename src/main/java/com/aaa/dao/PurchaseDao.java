@@ -29,6 +29,10 @@ public interface PurchaseDao {
             @Result(property = "procurementNo",column = "procurementNo"),
             @Result(property = "statusName",column = "status",
                     one = @One(select = "com.aaa.dao.PurchaseDao.getStatusNameByStatus")),
+            @Result(property = "purchaserName",column = "purchaser",
+                    one = @One(select = "com.aaa.dao.PurchaseDao.getEmpNameByNo")),
+            @Result(property = "supplierName",column = "supplier",
+                    one = @One(select = "com.aaa.dao.PurchaseDao.getSupplierNameByNo")),
             @Result(property = "purchaseDetailList", column = "procurementNo",
                     many = @Many(select = "com.aaa.dao.PurchaseDao.getPurchaseListByPno"))
     })
@@ -41,4 +45,12 @@ public interface PurchaseDao {
     //查询订单状态
     @Select("select valueName from dictionary where valueId=#{status} and typeName='采购订单状态'")
     public String getStatusNameByStatus(int status);
+
+
+    @Select("select name from employees where empNo=#{empNo} ")
+    public String getEmpNameByNo(String empNo);
+
+    @Select("select supplierName from supplier where supplierNo = #{supplierNo}")
+    public String getSupplierNameByNo(String supNo);
+
 }

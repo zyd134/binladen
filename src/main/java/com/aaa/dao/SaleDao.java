@@ -20,6 +20,10 @@ public interface SaleDao {
             @Result(property = "saleNo",column = "saleNo"),
             @Result(property = "statusName",column = "status",
                     one = @One(select = "com.aaa.dao.SaleDao.getStatusNameByStatus")),
+            @Result(property = "salePersonName",column = "salePerson",
+                    one = @One(select = "com.aaa.dao.SaleDao.getEmpNameByNo")),
+            @Result(property = "customerName",column = "customer",
+                    one = @One(select = "com.aaa.dao.SaleDao.getCustomerNameByNo")),
             @Result(property = "saleDetailList", column = "saleNo",
                     many = @Many(select = "com.aaa.dao.SaleDao.getSaleDetailListBySaleNo"))
     })
@@ -55,6 +59,12 @@ public interface SaleDao {
             "\t\t\t\t\t\tGROUP BY s.saleNo,g.goodNo) as goodform GROUP BY goodNo")
     public List<Goods> getGoodListByCustomerNo(String customerNo);
 
+    @Select("select name from employees where empNo=#{empNo} ")
+    public String getEmpNameByNo(String empNo);
+
+    @Select("select customerName from customer where customerNo=#{customerNo}")
+    public String getCustomerNameByNo(String customerNo);
+
 
     /**
      * 下面是销售退货的方法
@@ -82,6 +92,10 @@ public interface SaleDao {
             @Result(property = "saleNo",column = "saleNo"),
             @Result(property = "statusName",column = "status",
                     one = @One(select = "com.aaa.dao.SaleDao.getStatusNameByStatus")),
+            @Result(property = "salePersonName",column = "salePerson",
+                    one = @One(select = "com.aaa.dao.SaleDao.getEmpNameByNo")),
+            @Result(property = "customerName",column = "customer",
+                    one = @One(select = "com.aaa.dao.SaleDao.getCustomerNameByNo")),
             @Result(property = "saleDetailList", column = "saleNo",
                     many = @Many(select = "com.aaa.dao.SaleDao.getSaleDetailListBySaleNo"))
     })

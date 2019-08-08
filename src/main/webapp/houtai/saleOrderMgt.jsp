@@ -201,10 +201,10 @@
                         var tr="<tr index="+i+" style=\"background-color: #d4edda\">\n" +
                             "                                <td>"+data[i].saleNo+"</td>\n" +
                             "                                <td>"+data[i].saleTime+"</td>\n"+
-                            "                                <td>"+data[i].salePerson+"</td>\n" +
+                            "                                <td>"+data[i].salePersonName+"</td>\n" +
                             "                                <td>"+data[i].s_explain+"</td>\n" +
                             "                                <td>"+data[i].salePrice+"</td>\n" +
-                            "                                <td>"+data[i].customer+"</td>\n" +
+                            "                                <td>"+data[i].customerName+"</td>\n" +
                             "                                <td>"+data[i].statusName+"</td>\n" ;
                         if(statusflag==2){
                             tr+="<td>" +
@@ -250,10 +250,10 @@
                             var tr="<tr index="+i+" style=\"background-color: #d4edda\">\n" +
                                 "                                <td>"+data[i].saleNo+"</td>\n" +
                                 "                                <td>"+data[i].saleTime+"</td>\n"+
-                                "                                <td>"+data[i].salePerson+"</td>\n" +
+                                "                                <td>"+data[i].salePersonName+"</td>\n" +
                                 "                                <td>"+data[i].s_explain+"</td>\n" +
                                 "                                <td>"+data[i].salePrice+"</td>\n" +
-                                "                                <td>"+data[i].customer+"</td>\n" +
+                                "                                <td>"+data[i].customerName+"</td>\n" +
                                 "                                <td>"+data[i].statusName+"</td>\n" ;
                                     if(status==2){
                                         tr+="<td>" +
