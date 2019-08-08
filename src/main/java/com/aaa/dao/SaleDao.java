@@ -71,7 +71,7 @@ public interface SaleDao {
      */
 
     //添加销售退货单
-    @Insert("insert into sale_return(returnNo,returnDay,operator,handlePerson,customer,returnPrice) values(#{returnNo},#{returnDay},#{operator},#{handlePerson},#{customer},#{returnPrice})")
+    @Insert("insert into sale_return(returnNo,returnDay,operator,customer,returnPrice) values(#{returnNo},#{returnDay},#{operator},#{customer},#{returnPrice})")
     public boolean addSaleReturnOrder(SaleReturn saleReturn);
 
     //添加销售退货订单明细
