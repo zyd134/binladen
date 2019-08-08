@@ -16,6 +16,7 @@
             未付款
         </a>
     </li>
+    <li class="select" status="2"><a href="#pass" data-toggle="tab">已通过</a></li>
     <li class="select" status="7"><a href="#notpaybutbuy" data-toggle="tab">已采购未付款</a></li>
 </ul>
 <div id="myTabContent" class="tab-content">
@@ -96,6 +97,45 @@
 
 
 
+    <div class="tab-pane fade" id="pass">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>已通过订单</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>订单编号</th>
+                                <th>采购时间</th>
+                                <th>采购人</th>
+                                <th>说明</th>
+                                <th>采购总价</th>
+                                <th>订单状态</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+
+
 
 </div>
 
@@ -137,6 +177,8 @@
                                 "                                                <li class=\"notpaybtn\" pNo=\""+data[i].procurementNo+"\"><a >先采购再付款</a>\n" +
                                 "                                                </li>\n";
                         }
+
+
 
                         tr+="                                            </ul>\n" +
                             "                                        </div>\n" +
@@ -200,6 +242,11 @@
                             if(status!=7){
                                 tr+= "                                                </li>\n"+
                                     "                                                <li class=\"notpaybtn\" pNo=\""+data[i].procurementNo+"\"><a >先采购再付款</a>\n" +
+                                    "                                                </li>\n";
+                            }
+                            if(status==2){
+                                tr+= "                                                </li>\n"+
+                                    "                                                <li class=\"notpaynowbtn\" pNo=\""+data[i].procurementNo+"\"><a >暂不付款</a>\n" +
                                     "                                                </li>\n";
                             }
 
@@ -286,6 +333,32 @@
                         })
                     }else{
                         alert("失败！");
+                    }
+                }
+            })
+        })
+
+
+        $("tbody").on("click",".notpaynowbtn",function(){
+            var obj=$(this);
+            var pNo = obj.attr("pNO");
+            $.ajax({
+                url:"pro/updPOrderStatusByNo",
+                type:"post",
+                data:{status:4,pNo:pNo},
+                datatype:"json",
+                success:function (data) {
+                    if(data.result=="success"){
+                        alert("暂不付款成功！");
+                        obj.parents("tr").remove();
+                        var index = obj.parents("tr").attr("index");
+                        $("tr").each(function(){
+                            if($(this).attr("index")==index){
+                                $(this).remove();
+                            }
+                        })
+                    }else{
+                        alert("暂不付款失败！");
                     }
                 }
             })

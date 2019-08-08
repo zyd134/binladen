@@ -16,7 +16,9 @@
             未收款
         </a>
     </li>
+    <li class="select" status="3"><a href="#passed" data-toggle="tab">已通过</a></li>
     <li class="select" status="6"><a href="#payedNotConfirm" data-toggle="tab">已汇款未签收</a></li>
+
 </ul>
 <div id="myTabContent" class="tab-content">
     <div class="tab-pane fade in active" id="notgetpay">
@@ -101,6 +103,43 @@
                 <div class="x_panel">
                     <div class="x_title">
                         <h2>已汇款未签收订单</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>订单编号</th>
+                                <th>销售时间</th>
+                                <th>销售人</th>
+                                <th>说明</th>
+                                <th>销售总价</th>
+                                <th>订单状态</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+    <div class="tab-pane fade" id="passed">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>已通过订单</h2>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
@@ -236,10 +275,19 @@
                                 "                                            <ul class=\"dropdown-menu\" role=\"menu\">\n" ;
                                     if(status==6){
                                         tr+="                                                <li class=\"confirmbtn\" saleNo=\""+data[i].saleNo+"\"><a>签收</a>\n" ;
-                                    }else{
+                                    }else if(status==3){
+                                        tr+= "                                                </li>\n"+
+                                            "                                                <li class=\"notpaynowbtn\" saleNo=\""+data[i].saleNo+"\"><a >暂不收款</a>\n" +
+                                            "                                                </li>\n";
+
                                         tr+="                                                <li class=\"toldpaybtn\" ><a >催款</a>\n" +
                                             "                                                </li>\n";
                                     }
+                                    else{
+                                        tr+="                                                <li class=\"toldpaybtn\" ><a >催款</a>\n" +
+                                            "                                                </li>\n";
+                                    }
+
 
                             tr+="                                            </ul>\n" +
                                 "                                        </div>\n" +
@@ -327,6 +375,32 @@
                         })
                     }else{
                         alert("签收汇款失败！");
+                    }
+                }
+            })
+        })
+
+
+        $("tbody").on("click",".notpaynowbtn",function(){
+            var obj=$(this);
+            var saleNo = obj.attr("saleNo");
+            $.ajax({
+                url:"sale/updSaleStatusByNo",
+                type:"post",
+                data:{status:4,saleNo:saleNo},
+                datatype:"json",
+                success:function (data) {
+                    if(data.result=="success"){
+                        alert("暂不收款成功！");
+                        var index = obj.parents("tr").attr("index");
+                        obj.parents("tr").remove();
+                        $("tr").each(function(){
+                            if($(this).attr("index")==index){
+                                $(this).remove();
+                            }
+                        })
+                    }else{
+                        alert("暂不收款失败！");
                     }
                 }
             })
